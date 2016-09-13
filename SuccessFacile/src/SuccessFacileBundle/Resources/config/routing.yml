@@ -1,0 +1,16 @@
+Acceuil:
+    path: /
+    defaults: { _controller: SuccessFacileBundle:Site:index }
+
+Service:
+    path: /service
+    defaults: { _controller: SuccessFacileBundle:Calcul:index }
+
+About:
+    path: /about
+    defaults: { _controller: SuccessFacileBundle:Site:about }
+
+Contact:
+    path: /contact
+    defaults: { _controller: SuccessFacileBundle:Site:contact }
+

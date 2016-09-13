@@ -1,0 +1,4 @@
+success_facile:
+    resource: "@SuccessFacileBundle/Resources/config/routing.yml"
+    prefix:   /
+
