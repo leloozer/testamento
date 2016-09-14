@@ -1,0 +1,15 @@
+	{% extends "SuccessFacileBundle::layout.html.twig"%}
+	{%block body %}
+	<h2>Votre Situation:</h2>
+	<p><h5>Vous etes veuf(ve) et sans enfant</h5></p>
+	<p><strong>Age au deces</strong> {{age}} ans</p>
+	<p><strong>Vous avez</strong> {{enfant}} enfant(s)</p>
+	<p><strong>Valeur de votre residence:</strong> {{residence| number_format(2, ',',' ')}} euros</p>
+	<p><strong>Montant de votre epargne:</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
+	<p><strong>Autre:</strong> {{autre|number_format(2,',',' ')}} euros</p>
+	<p><strong>Soit un patrimoine de</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>
+	<h2>Votre Bilan:</h2>
+	<p>En l'absence de conjoint et d'enfants, les heritiers reservataires sont les ascendants et/ou les freres et soeurs.</p>
+	<p>Ce simulateur ne traite pas encore ce type de succession.</p>
+{%endblock%}
+

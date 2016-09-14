@@ -1,0 +1,28 @@
+	{% extends "SuccessFacileBundle::layout.html.twig"%}
+	{%block body %}
+	<h2>Votre Situation:</h2>
+	<p><h5>Vous etes divorce et famille non recompose avec enfant</h5></p>
+	<p><strong>Age au deces</strong> {{age}} ans</p>
+	<p><strong>Vous avez</strong> {{enfant}} enfant(s)</p>
+	<p><strong>Valeur de votre residence:</strong> {{residence| number_format(2, ',',' ')}} euros</p>
+	<p><strong>Montant de votre epargne:</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
+	<p><strong>Autre:</strong> {{autre|number_format(2,',',' ')}} euros</p>
+	<p><strong>Soit un patrimoine de</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>
+	<h2>Votre Bilan:</h2>
+	<table class="table table-hover">
+	<thead>
+	<tr>
+		<th>Revenant</th>
+		<th>Proportion</th>
+		<th>Valeur</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Part par enfant</td>
+		<td>1/{{enfant}} du patrimoine total</td>
+		<td>{{part| number_format(2,',',' ')}} euros</td>
+	</tr>
+	</tbody>
+	</table>
+{%endblock%}

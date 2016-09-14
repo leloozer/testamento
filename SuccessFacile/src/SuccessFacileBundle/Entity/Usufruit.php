@@ -38,6 +38,18 @@ class Usufruit
     /**
      * @var int
      *
+     * @ORM\Column(name="enfant_conjoint", type="smallint", nullable=true)
+     */
+    private $enfant_conjoint;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="enfant_perso", type="smallint", nullable=true)
+     */
+    private $enfant_perso;
+    /**
+     * @var int
+     *
      * @ORM\Column(name="residence", type="integer", nullable=true)
      */
     private $residence;
@@ -110,6 +122,50 @@ class Usufruit
     public function getEnfant()
     {
         return $this->enfant;
+    }
+    /**
+     * Set enfant_conjoint
+     *
+     * @param integer $enfant_conjoint
+     * @return Usufruit
+     */
+    public function setEnfantConjoint($enfant_conjoint)
+    {
+        $this->enfant_conjoint = $enfant_conjoint;
+
+        return $this;
+    }
+
+    /**
+     * Get enfant_conjoint
+     *
+     * @return integer 
+     */
+    public function getEnfantConjoint()
+    {
+        return $this->enfant_conjoint;
+    }
+    /**
+     * Set enfant_perso
+     *
+     * @param integer $enfant_perso
+     * @return Usufruit
+     */
+    public function setEnfantPerso($enfant_perso)
+    {
+        $this->enfant_perso = $enfant_perso;
+
+        return $this;
+    }
+
+    /**
+     * Get enfant_perso
+     *
+     * @return integer 
+     */
+    public function getEnfantPerso()
+    {
+        return $this->enfant_perso;
     }
 
     /**

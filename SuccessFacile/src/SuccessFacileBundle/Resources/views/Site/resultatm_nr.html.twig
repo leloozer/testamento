@@ -1,0 +1,63 @@
+	{% extends "SuccessFacileBundle::layout.html.twig"%}
+	{%block body %}
+	<h2>Votre Situation:</h2>
+	<p><h5>Vous etes marie et famille non recompose avec enfant</h5></p>
+	<p><strong>Age au deces</strong> {{age}} ans</p>
+	<p><strong>Vous avez</strong> {{enfant}} enfant(s)</p>
+	<p><strong>Valeur de votre residence:</strong> {{residence| number_format(2, ',',' ')}} euros</p>
+	<p><strong>Montant de votre epargne:</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
+	<p><strong>Autre:</strong> {{autre|number_format(2,',',' ')}} euros</p>
+	<p><strong>Soit un patrimoine de</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>
+	<h2>Votre Bilan:</h2>
+	<p><strong>Valeur de l'usufruit fiscal(Art. 669 CGI)</strong> {{val_usufruit}}%</p>
+	<p><strong>Valeur de la Nue-Propriete</strong> {{nue_propriete}}%</p>
+	<table class="table table-hover">
+	<thead>
+	<tr>
+		<th>Revenant</th>
+		<th>Proportion</th>
+		<th>Valeur</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Au conjoint survivant</td>
+		<td>1/2 du patrimoine total</td>
+		<td>{{revenant| number_format(2,',',' ')}} euros</td>
+	</tr>
+	<tr>
+		<td>A la succession</td>
+		<td>1/2 du patrimoine total</td>
+		<td>{{revenant| number_format(2,',', ' ')}} euros</td>
+	</tr>
+	</tbody>
+	</table>
+	<h2>Vos Solutions:</h2>
+	<table class="table table-hover">
+	<thead>
+	<tr>
+		<th>Votre repartition</th>
+		<th>Option 1</th>
+		<th>Option 2</th>
+		<th>Option 3</th>
+		<th>Option 4</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Conjoint survivant</td>
+		<td>{{conjoint_opt1|number_format(2, ',', ' ')}} euros</td>
+		<td>{{conjoint_opt2| number_format(2, ',', ' ')}} euros</td>
+		<td>{{conjoint_opt3| number_format(2, ',',' ')}} euros</td>
+		<td>{{conjoint_opt4| number_format(2,',',' ')}} euros</td>
+	</tr>
+	<tr>
+		<td>Part par enfant</td>
+		<td>{{enfant_opt1| number_format(2, ',', ' ')}} euros</td>
+		<td>{{enfant_opt2| number_format(2,',', ' ')}} euros</td>
+		<td>{{enfant_opt3| number_format(2,',', ' ')}} euros</td>
+		<td>{{enfant_opt4| number_format(2,',',' ')}} euros</td>
+	</tr>
+	</tbody>
+	</table>
+{%endblock%}

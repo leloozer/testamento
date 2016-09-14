@@ -1,0 +1,30 @@
+	{% extends "SuccessFacileBundle::layout.html.twig"%}
+	{%block body %}
+	<h2>Votre Situation:</h2>
+	<p><h5>Vous etes marie et sans enfant</h5></p>
+	<p><strong>Age au deces</strong> {{age}} ans</p>
+	<p><strong>Vous avez</strong> {{enfant}} enfant(s)</p>
+	<p><strong>Valeur de votre residence:</strong> {{residence| number_format(2, ',',' ')}} euros</p>
+	<p><strong>Montant de votre epargne:</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
+	<p><strong>Autre:</strong> {{autre|number_format(2,',',' ')}} euros</p>
+	<p><strong>Soit un patrimoine de</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>
+	<h2>Votre Bilan:</h2>
+	<p>Par default, le simulateur considere aue le conjoint survivant recueille la totalite de la succession en plein propriete; il n est donc pqs tenu compte de la presence eventuelle d ascendants reservataires.</p>
+	<table class="table table-hover">
+	<thead>
+	<tr>
+		<th>Revenant</th>
+		<th>Proportion</th>
+		<th>Valeur</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Vous</td>
+		<td>1/2 du patrimoine total</td>
+		<td>{{part| number_format(2,',',' ')}} euros</td>
+	</tr>
+	</tbody>
+	</table>
+{%endblock%}
+

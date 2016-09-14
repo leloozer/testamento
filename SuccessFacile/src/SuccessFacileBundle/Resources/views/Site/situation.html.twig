@@ -1,0 +1,19 @@
+	{% extends "SuccessFacileBundle::layout.html.twig" %}
+{% block body %}
+	<h2>Votre situation </h2></br>
+<div class="well">
+		<form method="POST" {{form_enctype(form)}}>
+			{{form_errors(form)}}
+			<div>
+				{{form_label(form.recompose, "Etes vous une famille recompose ?")}}
+	 			{{form_errors(form.recompose)}}
+				{{form_widget(form.recompose)}}
+			</div>
+				{{form_label(form.situ, "Quel est votre situation familial ?")}}
+	 			{{form_errors(form.situ)}}
+				{{form_widget(form.situ)}}
+				{{form_rest(form)}}
+			<input type="submit" id="formok" class= "btn btn">
+		</form>
+</div>	
+{% endblock %}
