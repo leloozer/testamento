@@ -1,0 +1,21 @@
+	{% extends "SuccessFacileBundle::layout.html.twig" %}
+{% block body %}
+	<h2>Vous n avez pas d enfant. </h2></br>
+<div class="well">
+		<form action={{path('Nochild')}} method="POST" {{form_enctype(form)}}>
+			<div>
+				{{form_label(form.maman, "Votre mere est")}}
+	 			{{form_errors(form.maman)}}
+				{{form_widget(form.maman)}}
+				{{form_label(form.papa, "Votre pere est")}}
+	 			{{form_errors(form.papa)}}
+				{{form_widget(form.papa)}}
+			</div>
+				{{form_label(form.siblings, "Nombre de Frere et soeur")}}
+	 			{{form_errors(form.siblings)}}
+				{{form_widget(form.siblings)}}
+				{{form_rest(form)}}
+			<input type="submit" id="formok" class= "btn btn">
+		</form>
+</div>	
+{% endblock %}

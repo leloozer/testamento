@@ -11,6 +11,54 @@
 	<h2>Votre Bilan:</h2>
 	<p>Le concubin n'a pas de vocation successorale sauf dispositions testamentaires.</p>
 	<p>En l'absence d'enfants, les heritiers reservataires sont les ascendants et/ou les freres et soeurs.</p>
-	<p>Ce simulateur ne traite pas encore ce type de succession.</p>
+	{% if mere == TRUE %}
+	<p>Votre mere est vivante.</p>
+	{% endif %}
+	{% if mere == FALSE %}
+	<p>Votre mere est decede.</p>
+	{% endif %}
+	{% if pere == TRUE %}
+	<p>Votre pere est vivante.</p>
+	{% endif %}
+	{% if pere == FALSE %}
+	<p>Votre pere est decede.</p>
+	{% endif %}
+	<p>Vous avez {{siblings}} freres et soeurs</p>
+	<h2>Vos solutions</h2>
+	<table class="table table-hover">
+	<thead>
+	<tr>
+		<th>Revenant</th>
+		<th>Proportion</th>
+		<th>Valeur</th>
+		<th>Cout Droit de succession</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% if mere == TRUE or pere == TRUE%}
+	<tr>
+		<td>Part par parent vivant</td>
+		 {% if siblings == 0 and mere == TRUE and pere == TRUE %}
+		<td> 100% du patrimoine total</td>
+		 {% elseif siblings == 0 %}
+		<td> 50% du patrimoine total</td>
+		{% endif %}
+		 {% if siblings != 0 %}
+		<td> 25% du patrimoine total</td>
+		{% endif %}
+		<td>{{partP| number_format(2,',',' ')}} euros</td>
+		<td>{{taxeP| number_format(2,',',' ')}} euros</td>
+	</tr>
+	{% endif %}
+		 {% if siblings != 0 %}
+	<tr>
+		<td>Part par frere et soeurs</td>
+		<td> {{pourcentE}}% du patrimoine total</td>
+		<td>{{partE| number_format(2,',',' ')}} euros</td>
+		<td>{{taxeE| number_format(2,',',' ')}} euros</td>
+	</tr>
+		{% endif %}
+	</tbody>
+	</table>
 {%endblock%}
 

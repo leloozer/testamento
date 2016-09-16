@@ -2,3 +2,5 @@ services:
 #    success_facile.example:
 #        class: SuccessFacileBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
+    oc_platform.droitsuccess:
+        class: SuccessFacileBundle\Services\Droitsuccess

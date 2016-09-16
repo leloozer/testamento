@@ -9,20 +9,68 @@
 	<p><strong>Autre:</strong> {{autre|number_format(2,',',' ')}} euros</p>
 	<p><strong>Soit un patrimoine de</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>
 	<h2>Votre Bilan:</h2>
-	<p>Par default, le simulateur considere aue le conjoint survivant recueille la totalite de la succession en plein propriete; il n est donc pqs tenu compte de la presence eventuelle d ascendants reservataires.</p>
+	<p>Par default, le simulateur considere que vous n avez pas fait de contrat de mariage</p>
+	{% if mere == TRUE %}
+	<p>Votre mere est vivante</p>
+	{%endif%}
+	{% if mere == FALSE %}
+	<p>Votre mere est decede</p>
+	{%endif%}
+	{% if pere == TRUE %}
+	<p>Votre pere est vivante</p>
+	{%endif%}
+	{% if pere == FALSE %}
+	<p>Votre pere est decede</p>
+	{%endif%}
+	<table class="table table-hover">
+	<thead>
+	<h4>Si vous avez fait une donation entre epoux</h4>
+	<tr>
+		<th>Revenant</th>
+		<th>Proportion</th>
+		<th>Valeur</th>
+		<th>Taxe droit de succession</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Le conjoint survivant</td>
+		<td>1/2 du patrimoine total</td>
+		<td>{{part| number_format(2,',',' ')}} euros</td>
+		<td>0 euros</td>
+	</tr>
+	</tbody>
+	</table>
+	<h4>Si vous n en avez pas faite</h4>
 	<table class="table table-hover">
 	<thead>
 	<tr>
 		<th>Revenant</th>
 		<th>Proportion</th>
 		<th>Valeur</th>
+		<th>Taxe droit de succession</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
-		<td>Vous</td>
-		<td>1/2 du patrimoine total</td>
-		<td>{{part| number_format(2,',',' ')}} euros</td>
+		<td>Le conjoint survivant</td>
+		{%if mere == TRUE and pere == TRUE %}	
+		<td>50% du patrimoine du defunt</td>
+		{% elseif mere == TRUE or pere == TRUE %}	
+		<td>75% du patrimoine du defunt</td>
+		{% elseif mere == FALSE and pere == FALSE %}	
+		<td>100% du patrimoine du defunt</td>
+		{%endif%}
+		<td>{{partM| number_format(2,',',' ')}} euros</td>
+		<td>0 euros</td>
+	</tr>
+	<tr>
+		<td>Part par parent survivant</td>
+		{%if mere == TRUE or pere == TRUE %}	
+		<td>25% du patrimoine du defunt</td>
+		{%endif%}
+		<td>{{partP| number_format(2,',',' ')}} euros</td>
+		<td>{{taxeP| number_format(2,',',' ')}} euros</td>
 	</tr>
 	</tbody>
 	</table>

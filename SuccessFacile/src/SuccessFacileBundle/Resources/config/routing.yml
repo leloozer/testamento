@@ -62,6 +62,10 @@ Ec_R:
     path: /simulateur/Ec_R
     defaults: { _controller: SuccessFacileBundle:Calcul:Ec_R }
 
+Nochild:
+    path: /simulateur/Nochild
+    defaults: { _controller: SuccessFacileBundle:Calcul:FormNE }
+
 About:
     path: /about
     defaults: { _controller: SuccessFacileBundle:Site:about }
