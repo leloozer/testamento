@@ -1,0 +1,17 @@
+	{% extends "SuccessFacileBundle::layout.html.twig" %}
+{% block body %}
+	<h2>Vous n avez plus vos parents et vous etes enfant unique </h2></br>
+<div class="well">
+		<form action={{path('gp')}} method="POST" {{form_enctype(form)}}>
+			<div>
+				{{form_label(form.gppaternel, "Vos grands-parents paternel sont")}}
+	 			{{form_errors(form.gppaternel)}}
+				{{form_widget(form.gppaternel)}}
+				{{form_label(form.gpmaternel, "Vos grands-parents maternel sont")}}
+	 			{{form_errors(form.gpmaternel)}}
+				{{form_widget(form.gpmaternel)}}
+				{{form_rest(form)}}
+			<input type="submit" id="formok" class= "btn btn">
+		</form>
+</div>	
+{% endblock %}

@@ -95,6 +95,12 @@ class CalculController extends Controller
 *
 */
 
+/*
+*
+*   FORMULAIRE PERE/MERE/FRERE ET SOEUR
+*
+*/
+
 	public function FormNEAction()
 	{
 		$nochild = new Situnochild;
@@ -134,6 +140,41 @@ class CalculController extends Controller
 		return $this->render('SuccessFacileBundle:Site:formnochild.html.twig', array('form' => $form->createView()));	
 	}
 	
+
+
+/*
+*
+*   FORMULAIRE GRAND PARENT
+*
+*/
+
+	public function FormgpAction()
+	{
+		$GP = new Situnochild;
+		$formBuilder = $this->createFormBuilder($GP);
+		$formBuilder
+			->add('gppaternel', 'choice', array('choices'=>array(1=>'Vivant', 0=>'Decede')))
+			->add('gpmaternel', 'choice', array('choices'=>array(1=>'Vivant', 0=>'Decede')));
+		$form = $formBuilder->getForm();
+		
+		$request = $this->getRequest();
+		if ($request->getMethod() == 'POST')
+		{
+			$form->bind($request);
+			if ($form->isValid())
+			{
+				$gpp = $GP->getGppaternel();
+				 $gpm = $GP->getGpmaternel(); 
+				$session = $this->getRequest()->getSession();
+					return $this->ResultGPAction($gpp, $gpm);
+			}
+		}
+		return $this->render('SuccessFacileBundle:Site:formgp.html.twig', array('form' => $form->createView()));	
+	}
+
+
+
+
 // Method Celib non recompose
 	public function C_NRAction()
 	{
@@ -592,22 +633,48 @@ class CalculController extends Controller
 *     NON ENFANT
 *
 */
+	public function ResultGPAction($gpp, $gpm)
+	{
+			$session = $this->getRequest()->getSession();
+			$age = $session->get('age');
+			$enfant = $session->get('enfant');
+			$residence = $session->get('residence');
+			$epargne = $session->get('epargne');
+			$autre = $session->get('autre');
+			$pere = $session->get('pere');
+			$mere = $session->get('mere');
+			$siblings = $session->get('siblings');
+
+			$patrimoine = $residence + $epargne + $autre;
+			$tax = $this->container->get('oc_platform.droitsuccess');
+			
+				$part = $patrimoine / 2;
+				$taxe = $tax->Taxecumule0($part);			
+			return $this->render('SuccessFacileBundle:Site:resultatgp.html.twig', array('age' => $age, 'enfant'=>$enfant, 'residence'=>$residence, 'epargne'=>$epargne, 
+		'autre'=>$autre, 'patrimoine'=>$patrimoine, 'pere'=>$pere, 'mere'=>$mere, 'siblings'=>$siblings, 'gpp'=>$gpp, 'gpm'=>$gpm, 'part'=>$part, 'taxe'=>$taxe));
+	
+	}
+	
 	public function C_NEresultAction($pere, $mere, $siblings)
 	{
-		$session = $this->getRequest()->getSession();
-		$age = $session->get('age');
-		$enfant = $session->get('enfant');
-		$residence = $session->get('residence');
-		$epargne = $session->get('epargne');
-		$autre = $session->get('autre');
-		$patrimoine = $residence + $epargne + $autre;
-
 		if ($siblings == 0 && ($pere == FALSE && $mere == FALSE))
 		{
-			return "On ne gere pas les grands parents encore......";
+			$session = $this->getRequest()->getSession();
+			$session->set('pere', $pere);
+			$session->set('mere', $mere);
+			$session->set('siblings', $siblings);
+			return $this->FormgpAction();
 		}
 		else
 		{
+			$session = $this->getRequest()->getSession();
+			$age = $session->get('age');
+			$enfant = $session->get('enfant');
+			$residence = $session->get('residence');
+			$epargne = $session->get('epargne');
+			$autre = $session->get('autre');
+			$patrimoine = $residence + $epargne + $autre;
+
 			$tax = $this->container->get('oc_platform.droitsuccess');
 			if ($siblings == 0 && $pere == TRUE && $mere == TRUE)
 			{
@@ -688,20 +755,24 @@ class CalculController extends Controller
 
 	public function V_NEresultAction($pere, $mere, $siblings)
 	{
-		$session = $this->getRequest()->getSession();
-		$age = $session->get('age');
-		$enfant = $session->get('enfant');
-		$residence = $session->get('residence');
-		$epargne = $session->get('epargne');
-		$autre = $session->get('autre');
-		$patrimoine = $residence + $epargne + $autre;
-
 		if ($siblings == 0 && ($pere == FALSE || $mere == FALSE))
 		{
-			return "On ne gere pas les grands parents encore......";
+			$session = $this->getRequest()->getSession();
+			$session->set('pere', $pere);
+			$session->set('mere', $mere);
+			$session->set('siblings', $siblings);
+			return $this->FormgpAction();
 		}
 		else
 		{
+			$session = $this->getRequest()->getSession();
+			$age = $session->get('age');
+			$enfant = $session->get('enfant');
+			$residence = $session->get('residence');
+			$epargne = $session->get('epargne');
+			$autre = $session->get('autre');
+			$patrimoine = $residence + $epargne + $autre;
+			
 			$tax = $this->container->get('oc_platform.droitsuccess');
 			if ($siblings == 0 && $pere == TRUE && $mere == TRUE)
 			{
@@ -751,20 +822,24 @@ class CalculController extends Controller
 	
 	public function D_NEresultAction($pere, $mere, $siblings)
 	{
-		$session = $this->getRequest()->getSession();
-		$age = $session->get('age');
-		$enfant = $session->get('enfant');
-		$residence = $session->get('residence');
-		$epargne = $session->get('epargne');
-		$autre = $session->get('autre');
-		$patrimoine = $residence + $epargne + $autre;
-
 		if ($siblings == 0 && ($pere == FALSE || $mere == FALSE))
 		{
-			return "On ne gere pas les grands parents encore......";
+			$session = $this->getRequest()->getSession();
+			$session->set('pere', $pere);
+			$session->set('mere', $mere);
+			$session->set('siblings', $siblings);
+			return $this->FormgpAction();
 		}
 		else
 		{
+			$session = $this->getRequest()->getSession();
+			$age = $session->get('age');
+			$enfant = $session->get('enfant');
+			$residence = $session->get('residence');
+			$epargne = $session->get('epargne');
+			$autre = $session->get('autre');
+			$patrimoine = $residence + $epargne + $autre;
+			
 			$tax = $this->container->get('oc_platform.droitsuccess');
 			if ($siblings == 0 && $pere == TRUE && $mere == TRUE)
 			{
@@ -813,20 +888,24 @@ class CalculController extends Controller
 	}
 	public function S_NEresultAction($pere, $mere, $siblings)
 	{
-		$session = $this->getRequest()->getSession();
-		$age = $session->get('age');
-		$enfant = $session->get('enfant');
-		$residence = $session->get('residence');
-		$epargne = $session->get('epargne');
-		$autre = $session->get('autre');
-		$patrimoine = $residence + $epargne + $autre;
-
 		if ($siblings == 0 && ($pere == FALSE || $mere == FALSE))
 		{
-			return "On ne gere pas les grands parents encore......";
+			$session = $this->getRequest()->getSession();
+			$session->set('pere', $pere);
+			$session->set('mere', $mere);
+			$session->set('siblings', $siblings);
+			return $this->FormgpAction();
 		}
 		else
 		{
+			$session = $this->getRequest()->getSession();
+			$age = $session->get('age');
+			$enfant = $session->get('enfant');
+			$residence = $session->get('residence');
+			$epargne = $session->get('epargne');
+			$autre = $session->get('autre');
+			$patrimoine = $residence + $epargne + $autre;
+			
 			$tax = $this->container->get('oc_platform.droitsuccess');
 			if ($siblings == 0 && $pere == TRUE && $mere == TRUE)
 			{
@@ -875,20 +954,24 @@ class CalculController extends Controller
 	}
 	public function Ec_NEresultAction($pere, $mere, $siblings)
 	{
-		$session = $this->getRequest()->getSession();
-		$age = $session->get('age');
-		$enfant = $session->get('enfant');
-		$residence = $session->get('residence');
-		$epargne = $session->get('epargne');
-		$autre = $session->get('autre');
-		$patrimoine = $residence + $epargne + $autre;
-		
 		if ($siblings == 0 && ($pere == FALSE || $mere == FALSE))
 		{
-			return "On ne gere pas les grands parents encore......";
+			$session = $this->getRequest()->getSession();
+			$session->set('pere', $pere);
+			$session->set('mere', $mere);
+			$session->set('siblings', $siblings);
+			return $this->FormgpAction();
 		}
 		else
 		{
+			$session = $this->getRequest()->getSession();
+			$age = $session->get('age');
+			$enfant = $session->get('enfant');
+			$residence = $session->get('residence');
+			$epargne = $session->get('epargne');
+			$autre = $session->get('autre');
+			$patrimoine = $residence + $epargne + $autre;
+			
 			$tax = $this->container->get('oc_platform.droitsuccess');
 			if ($siblings == 0 && $pere == TRUE && $mere == TRUE)
 			{
@@ -938,20 +1021,24 @@ class CalculController extends Controller
 
 	public function P_NEresultAction($pere, $mere, $siblings)
 	{
-		$session = $this->getRequest()->getSession();
-		$age = $session->get('age');
-		$enfant = $session->get('enfant');
-		$residence = $session->get('residence');
-		$epargne = $session->get('epargne');
-		$autre = $session->get('autre');
-		$patrimoine = $residence + $epargne + $autre;
-
 		if ($siblings == 0 && ($pere == FALSE || $mere == FALSE))
 		{
-			return "On ne gere pas les grands parents encore......";
+			$session = $this->getRequest()->getSession();
+			$session->set('pere', $pere);
+			$session->set('mere', $mere);
+			$session->set('siblings', $siblings);
+			return $this->FormgpAction();
 		}
 		else
 		{
+			$session = $this->getRequest()->getSession();
+			$age = $session->get('age');
+			$enfant = $session->get('enfant');
+			$residence = $session->get('residence');
+			$epargne = $session->get('epargne');
+			$autre = $session->get('autre');
+			$patrimoine = $residence + $epargne + $autre;
+			
 			$tax = $this->container->get('oc_platform.droitsuccess');
 			if ($siblings == 0 && $pere == TRUE && $mere == TRUE)
 			{

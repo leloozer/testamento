@@ -7,6 +7,14 @@ Simulateur:
     path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:index }
 
+Combien:
+    path: /combien_tu_raques_batard
+    defaults: { _controller: SuccessFacileBundle:Combien:index }
+
+Quotite:
+    path: /tu_ne_peux_pas_desheriter_tes_gosses_FDP
+    defaults: { _controller: SuccessFacileBundle:Quotite:index }
+
 M_NR:
     path: /simulateur/M_NR
     defaults: { _controller: SuccessFacileBundle:Calcul:M_NR }
@@ -65,6 +73,10 @@ Ec_R:
 Nochild:
     path: /simulateur/Nochild
     defaults: { _controller: SuccessFacileBundle:Calcul:FormNE }
+
+gp:
+    path: /simulateur/
+    defaults: { _controller: SuccessFacileBundle:Calcul:Formgp }
 
 About:
     path: /about

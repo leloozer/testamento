@@ -1,0 +1,22 @@
+	{% extends "SuccessFacileBundle::layout.html.twig" %}
+{% block body %}
+	<h2>Combien vais-je payer?</h2></br>
+<div class="well">
+		<form method="POST" {{form_enctype(form)}}>
+			{{form_errors(form)}}
+			<div>
+				{{form_label(form.somme, "Somme de votre heritage (en euros)")}}
+	 			{{form_errors(form.somme)}}
+				{{form_widget(form.somme)}}
+				{{form_label(form.handicap, "Etes vous handicape ?")}}
+	 			{{form_errors(form.handicap)}}
+				{{form_widget(form.handicap)}}
+			</div>
+				{{form_label(form.lien, "Quel est votre lien avec le defunt ?")}}
+	 			{{form_errors(form.lien)}}
+				{{form_widget(form.lien)}}
+				{{form_rest(form)}}
+			<input type="submit" id="formok" class= "btn btn">
+		</form>
+</div>	
+{% endblock %}

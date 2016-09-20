@@ -1,0 +1,59 @@
+	{% extends "SuccessFacileBundle::layout.html.twig"%}
+	{%block body %}
+	<h2>Votre Situation:</h2>
+	{% if handicap == TRUE %}
+		<p>Vous etes handicape.</p>
+	{% endif %}
+	{% if handicap == FALSE %}
+		<p>Vous n'etes pas handicape.</p>
+	{% endif %}
+	{% if lien == 0 %}
+	<p>Vous etes le mari du defunt.</p>
+	{% endif %}
+	{% if lien == 1 %}
+	<p>Vous etes un ascendant direct du defunt.</p>
+	{% endif %}
+	{% if lien == 2 %}
+	<p>Vous etes le fils ou la fils du defunt.</p>
+	{% endif %}
+	{% if lien == 3 %}
+	<p>Vous etes le petit-fils/petite-fille ou arriere-petit-fils/arriere-petite-fille du defunt.</p>
+	{% endif %}
+	{% if lien == 4 %}
+	<p>Vous etes le frere ou la soeur du defunt.</p>
+	{% endif %}
+	{% if lien == 5 %}
+	<p>Vous etes le neveu ou la niece du defunt.</p>
+	{% endif %}
+	{% if lien == 6 %}
+	<p>Vous etes parent jusqu'au 4eme degre inclus du defunt.</p>
+	{% endif %}
+	{% if lien == 7 %}
+	<p>Vous etes sans lien de sang avec le defunt ou parent du 5eme degre minimum.</p>
+	{% endif %}
+	{% if lien == 8 %}
+	<p>Vous etes le partenaire de PACS du defunt.</p>
+	{% endif %}
+	<h2>Votre Bilan:</h2>
+	{% if lien == 8 %}
+	<p>Le partenaire d'un PACS n'a pas de vocation successorale sauf dispositions testamentaires.</p>
+	{% endif %}
+	<h6>Le montant de la taxe a payer</h6>
+	<table class="table table-hover">
+	<thead>
+	<tr>
+		<th>Votre heritage</th>
+		<th>Cout Droit de succession</th>
+		<th>Heritage apres payement de la taxe</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>{{somme| number_format(2,',',' ')}} euros</td>
+		<td>{{taxe| number_format(2,',',' ')}} euros</td>
+		<td>{{result| number_format(2,',',' ')}} euros</td>
+	</tr>
+	</tbody>
+	</table>
+{%endblock%}
+

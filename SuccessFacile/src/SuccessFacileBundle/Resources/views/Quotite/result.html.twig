@@ -1,0 +1,30 @@
+	{% extends "SuccessFacileBundle::layout.html.twig"%}
+	{%block body %}
+	<h2>Votre Situation:</h2>
+	{% if marie == TRUE %}
+		<p>Vous etes marie.</p>
+	{% endif %}
+	{% if marie == FALSE %}
+		<p>Vous n'etes pas marie.</p>
+	{% endif %}
+	<p>Vous avez un patrimoine personnel de {{patrimoine| number_format(2,',', ' ')}} euros</p>
+	<p>Vous avez {{child}} enfant(s).
+	<h2>Votre Bilan:</h2>
+	<table class="table table-hover">
+	<thead>
+	<tr>
+		<th>Quotite disponible (en %)</th>
+		<th>Quotite disponible (en euros)</th>
+		<th>Heritage restant sans la quotite disponible</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>{{ pourcentQD}} %</td>
+		<td>{{QD| number_format(2,',',' ')}} euros</td>
+		<td>{{reste| number_format(2,',',' ')}} euros</td>
+	</tr>
+	</tbody>
+	</table>
+{%endblock%}
+

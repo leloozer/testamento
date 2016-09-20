@@ -11,7 +11,12 @@ class Droitsuccess
 *
 *  Taxecumule1 = Frere ou soeur
 *  
-*
+*  Taxecumule2 = Autre 4eme degres max inclus
+	
+*  Taxecumule3 = Autre  + 4eme degres ou non parents
+   
+*  Taxecumule4 = Neveu/Niece
+   
 */
 
 
@@ -131,6 +136,76 @@ class Droitsuccess
 		return (-1);	
 	}
 
-}
 
+
+/* 
+*     calcul taxe cumule pour Autre (4eme degres max inclus)
+*
+* @param integer $part
+* @return integer
+* 
+*
+*/
+
+	public function Taxecumule2($part)
+	{
+		$taxecumule = 0;
+		$part = $part - 1594;
+		if ($part <= 0)
+			return (0);
+		else
+		{
+			$taxecumule = $part * 55 / 100;
+			return ($taxecumule);
+		}
+		return (-1);
+	}
+
+/* 
+*     calcul taxe cumule pour Autre (+4eme degres ou non parent)
+*
+* @param integer $part
+* @return integer
+* 
+*
+*/
+
+	public function Taxecumule3($part)
+	{
+		$taxecumule = 0;
+		$part = $part - 1594;
+		if ($part <= 0)
+			return (0);
+		else
+		{
+			$taxecumule = $part * 60 / 100;
+			return ($taxecumule);
+		}
+		return (-1);
+	}
+
+
+/* 
+*     calcul taxe cumule pour Neveu/Niece
+*
+* @param integer $part
+* @return integer
+* 
+*
+*/
+
+	public function Taxecumule4($part)
+	{
+		$taxecumule = 0;
+		$part = $part - 7967;
+		if ($part <= 0)
+			return (0);
+		else
+		{
+			$taxecumule = $part * 55 / 100;
+			return ($taxecumule);
+		}
+		return (-1);
+	}
+}
 ?>

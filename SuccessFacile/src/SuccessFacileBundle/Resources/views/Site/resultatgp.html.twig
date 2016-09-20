@@ -1,0 +1,95 @@
+	{% extends "SuccessFacileBundle::layout.html.twig"%}
+	{%block body %}
+	<h2>Votre Situation:</h2>
+	{% if app.session.get('situ') == 0 %}
+	<p><h5>Vous etes celibataire et sans enfant</h5></p>
+	{% endif %}
+	{% if app.session.get('situ') == 2 %}
+	<p><h5>Vous etes veuf et sans enfant</h5></p>
+	{% endif %}
+	{% if app.session.get('situ') == 3 %}
+	<p><h5>Vous etes divorce et sans enfant</h5></p>
+	{% endif %}
+	{% if app.session.get('situ') == 4 %}
+	<p><h5>Vous etes separe et sans enfant</h5></p>
+	{% endif %}
+	{% if app.session.get('situ') == 5 %}
+	<p><h5>Vous etes pacse et sans enfant</h5></p>
+	{% endif %}
+	{% if app.session.get('situ') == 6 %}
+	<p><h5>Vous etes en concubinage et sans enfant</h5></p>
+	{% endif %}
+	<p><strong>Age au deces</strong> {{age}} ans</p>
+	<p><strong>Vous avez</strong> {{enfant}} enfant(s)</p>
+	<p><strong>Valeur de votre residence:</strong> {{residence| number_format(2, ',',' ')}} euros</p>
+	<p><strong>Montant de votre epargne:</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
+	<p><strong>Autre:</strong> {{autre|number_format(2,',',' ')}} euros</p>
+	<p><strong>Soit un patrimoine de</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>
+	<h2>Votre Bilan:</h2>
+	<p>En l'absence de conjoint et d'enfants, les heritiers reservataires sont les ascendants et/ou les freres et soeurs.</p>
+	<p>Votre mere est decede.</p>
+	<p>Votre pere est decede.</p>
+	<p>Vous avez n avez pas de freres et soeurs</p>
+	{% if gpp == TRUE %}
+	Vos grands parents paternels sont vivants.
+	{% endif %}
+	{% if gpp == FALSE %}
+	Vos grands parents paternels sont decedes.
+	{% endif %}
+	{% if gpm == TRUE %}
+	Vos grands parents maternels sont vivants.
+	{% endif %}
+	{% if gpm == FALSE %}
+	Vos grands parents maternels sont decedes.
+	{% endif %}
+	<h2>Vos solutions</h2>
+	<table class="table table-hover">
+	<thead>
+	<tr>
+		<th>Revenant</th>
+		<th>Proportion</th>
+		<th>Valeur</th>
+		<th>Cout Droit de succession</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% if gpp == TRUE and gpm == TRUE %}
+	<tr>
+		<td>Part par grand-parent vivant</td>
+		<td> 50% du patrimoine total</td>
+		<td>{{part| number_format(2,',',' ')}} euros</td>
+		<td>{{taxe | number_format(2,',',' ')}} euros</td>
+	</tr>
+	{% endif %}
+	{% if gpp == FALSE and gpm == FALSE %}
+	<tr>
+		<td>Part famille maternel</td>
+		<td> 50% du patrimoine total</td>
+		<td>{{part| number_format(2,',',' ')}} euros</td>
+		<td> la taxe est calcule en fonction de votre degre avec le defunt</td>
+	</tr>
+	<tr>
+		<td>Part famille paternel</td>
+		<td> 50% du patrimoine total</td>
+		<td>{{part| number_format(2,',',' ')}} euros</td>
+		<td> la taxe est calcule en fonction de votre degre avec le defunt</td>
+	</tr>
+	{% endif %}
+	{% if gpp == FALSE or gpm == FALSE %}
+	<tr>
+		<td>Part par grand-parent vivant</td>
+		<td> 50% du patrimoine total</td>
+		<td>{{part| number_format(2,',',' ')}} euros</td>
+		<td>{{taxe | number_format(2,',',' ')}} euros</td>
+	</tr>
+	<tr>
+		<td>Part pour l autre famille</td>
+		<td> 50% du patrimoine total</td>
+		<td>{{part| number_format(2,',',' ')}} euros</td>
+		<td> la taxe est calcule en fonction de votre degre avec le defunt</td>
+	</tr>
+	{% endif %}
+	</tbody>
+	</table>
+{%endblock%}
+
