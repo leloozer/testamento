@@ -75,7 +75,7 @@
 		<td> la taxe est calcule en fonction de votre degre avec le defunt</td>
 	</tr>
 	{% endif %}
-	{% if gpp == FALSE or gpm == FALSE %}
+	{% if (gpp == FALSE and gpm == TRUE) or (gpm == FALSE and gpp == TRUE) %}
 	<tr>
 		<td>Part par grand-parent vivant</td>
 		<td> 50% du patrimoine total</td>

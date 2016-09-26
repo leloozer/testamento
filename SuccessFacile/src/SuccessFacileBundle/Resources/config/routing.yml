@@ -8,70 +8,70 @@ Simulateur:
     defaults: { _controller: SuccessFacileBundle:Calcul:index }
 
 Combien:
-    path: /combien_tu_raques_batard
+    path: /combien
     defaults: { _controller: SuccessFacileBundle:Combien:index }
 
 Quotite:
-    path: /tu_ne_peux_pas_desheriter_tes_gosses_FDP
+    path: /quotite
     defaults: { _controller: SuccessFacileBundle:Quotite:index }
 
 M_NR:
-    path: /simulateur/M_NR
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:M_NR }
 
 M_R:
-    path: /simulateur/M_R
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:M_R }
 
 C_NR:
-    path: /simulateur/C_NR
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:C_NR }
 
 C_R:
-    path: /simulateur/C_R
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:C_R }
 
 V_NR:
-    path: /simulateur/V_NR
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:V_NR }
 
 V_R:
-    path: /simulateur/V_R
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:V_R }
 
 S_NR:
-    path: /simulateur/S_NR
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:S_NR }
 S_R:
-    path: /simulateur/S_R
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:S_R }
 
 D_NR:
-    path: /simulateur/D_NR
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:D_NR }
 
 D_R:
-    path: /simulateur/D_R
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:D_R }
 
 P_NR:
-    path: /simulateur/P_NR
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:P_NR }
 
 P_R:
-    path: /simulateur/P_R
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:P_R }
 
 Ec_NR:
-    path: /simulateur/Ec_NR
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:Ec_NR }
 
 Ec_R:
-    path: /simulateur/Ec_R
+    path: /simulateur
     defaults: { _controller: SuccessFacileBundle:Calcul:Ec_R }
 
 Nochild:
-    path: /simulateur/Nochild
+    path: /simulateur/
     defaults: { _controller: SuccessFacileBundle:Calcul:FormNE }
 
 gp:

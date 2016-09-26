@@ -106,8 +106,8 @@ class CalculController extends Controller
 		$nochild = new Situnochild;
 		$formBuilder = $this->createFormBuilder($nochild);
 		$formBuilder
-			->add('maman', 'choice', array('choices'=>array(1=>'Vivant', 0=>'Descede')))
-			->add('papa', 'choice', array('choices'=>array(1=>'Vivant', 0=>'Descede')))
+			->add('maman', 'choice', array('choices'=>array(1=>'Vivant', 0=>'Decede')))
+			->add('papa', 'choice', array('choices'=>array(1=>'Vivant', 0=>'Decede')))
 			->add('siblings', 'integer');
 		$form = $formBuilder->getForm();
 		
