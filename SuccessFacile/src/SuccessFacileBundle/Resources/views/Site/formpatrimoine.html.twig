@@ -1,24 +1,16 @@
 	{% extends "SuccessFacileBundle::layout.html.twig" %}
 {% block body %}
-	<h3>Option en concubinage et Famille non recomposee</h3></br>
+	<h3>Votre patrimoine</h3></br>
 <div class="well">
-		<form action="{{path('Ec_NR')}}" method="POST" {{form_enctype(form1)}}>
-			<div>
-				{{form_label(form1.age, "Age au deces (ans)")}}
-	 			{{form_errors(form1.age)}}
-				{{form_widget(form1.age)}}
-			</div>
-			<h5>Descendants:</h5>
-			<div>
-				{{form_label(form1.enfant, "Nombre d'enfants")}}
-				{{form_errors(form1.enfant)}}
-				{{form_widget(form1.enfant)}}
-			</div>
+		<form action="{{path('formpatrimoine')}}" method="POST" {{form_enctype(form1)}}>
 			<h5>Patrimoine:</h5>
 			<div>
 				{{form_label(form1.residence, "Residence principale (en euros)")}}
 				{{form_errors(form1.residence)}}
 				{{form_widget(form1.residence)}}
+				{{form_label(form1.opt_residence, "Degre de propriete")}}
+				{{form_errors(form1.opt_residence)}}
+				{{form_widget(form1.opt_residence)}}
 			</div>
 			<div>
 				{{form_label(form1.epargne, "Epargne (en euros)")}}

@@ -21,7 +21,23 @@
 	{% endif %}
 	<p><strong>Age au deces</strong> {{age}} ans</p>
 	<p><strong>Vous avez</strong> {{enfant}} enfant(s)</p>
-	<p><strong>Valeur de votre residence:</strong> {{residence| number_format(2, ',',' ')}} euros</p>
+	<p><strong>Valeur de votre residence:</strong> {{residencetotal| number_format(2, ',',' ')}} euros dont vous detenez {{pourcent_residence}}% en 
+{%if opt_residence == 0 %}
+en pleine propriete
+{% endif %}
+{%if opt_residence == 1 %}
+en SCI
+{% endif %}
+{%if opt_residence == 2 %}
+en indivision
+{% endif %}
+{%if opt_residence == 3 %}
+en Nue_propriete
+{% endif %}
+{%if opt_residence == 4 %}
+en Usufruit
+{% endif %}
+soit la valeur de {{residencefinal | number_format(2, ',', ' ')}} euros</p>
 	<p><strong>Montant de votre epargne:</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
 	<p><strong>Autre:</strong> {{autre|number_format(2,',',' ')}} euros</p>
 	<p><strong>Soit un patrimoine de</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>

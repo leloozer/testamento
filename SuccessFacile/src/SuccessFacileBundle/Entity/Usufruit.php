@@ -50,6 +50,19 @@ class Usufruit
     /**
      * @var int
      *
+     * @ORM\Column(name="pourcent_residence", type="integer", nullable=true)
+     */
+    private $pourcent_residence;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="opt_residence", type="integer", nullable=true)
+     */
+    private $opt_residence;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="residence", type="integer", nullable=true)
      */
     private $residence;
@@ -168,6 +181,50 @@ class Usufruit
         return $this->enfant_perso;
     }
 
+    /**
+     * Set pourcent_residence
+     *
+     * @param integer $pourcent_residence
+     * @return Usufruit
+     */
+    public function setPourcentResidence($pourcent_residence)
+    {
+        $this->pourcent_residence = $pourcent_residence;
+
+        return $this;
+    }
+
+    /**
+     * Get pourcent_residence
+     *
+     * @return integer 
+     */
+    public function getPourcentResidence()
+    {
+        return $this->pourcent_residence;
+    }
+    /**
+     * Set opt_residence
+     *
+     * @param integer $opt_residence
+     * @return Usufruit
+     */
+    public function setOptResidence($opt_residence)
+    {
+        $this->opt_residence = $opt_residence;
+
+        return $this;
+    }
+
+    /**
+     * Get opt_residence
+     *
+     * @return integer 
+     */
+    public function getOptResidence()
+    {
+        return $this->opt_residence;
+    }
     /**
      * Set residence
      *

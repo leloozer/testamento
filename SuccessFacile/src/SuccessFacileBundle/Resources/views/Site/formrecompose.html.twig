@@ -2,10 +2,10 @@
 {% block body %}
 	<h2>Votre situation </h2></br>
 <div class="well">
-		<form method="POST" {{form_enctype(form)}}>
-				{{form_label(form.situ, "Quel est votre situation familial ?")}}
-	 			{{form_errors(form.situ)}}
-				{{form_widget(form.situ)}}
+		<form action= {{path('recompose')}} method="POST" {{form_enctype(form)}}>
+				{{form_label(form.recompose, "Etes vous une famille recompose ?")}}
+	 			{{form_errors(form.recompose)}}
+				{{form_widget(form.recompose)}}
 				{{form_rest(form)}}
 			<input type="submit" id="formok" class= "btn btn">
 		</form>

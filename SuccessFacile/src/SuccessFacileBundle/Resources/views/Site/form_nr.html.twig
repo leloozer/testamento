@@ -1,0 +1,21 @@
+	{% extends "SuccessFacileBundle::layout.html.twig" %}
+{% block body %}
+	<h3>Votre age et votre descendance</h3></br>
+<div class="well">
+		<form action="{{path('form_NR')}}" method="POST" {{form_enctype(form1)}}>
+			<div>
+				{{form_label(form1.age, "Votre age (ans)")}}
+	 			{{form_errors(form1.age)}}
+				{{form_widget(form1.age)}}
+			</div>
+			<h5>Descendants:</h5>
+			<div>
+				{{form_label(form1.enfant, "Nombre d'enfants")}}
+				{{form_errors(form1.enfant)}}
+				{{form_widget(form1.enfant)}}
+			</div>
+				{{form_rest(form1)}}
+			<input type="submit" id="formok" class= "btn btn">
+		</form>
+</div>	
+{% endblock %}

@@ -1,0 +1,60 @@
+	{% extends "SuccessFacileBundle::layout.html.twig"%}
+	{%block body %}
+	<h2>Votre Situation:</h2>
+	{% if app.session.get('situ') == 0 %}
+	<p><h5>Vous etes celibataire avec enfant</h5></p>
+	{% endif %}
+	{% if app.session.get('situ') == 2 %}
+	<p><h5>Vous etes veuf et sans enfant</h5></p>
+	{% endif %}
+	{% if app.session.get('situ') == 3 %}
+	<p><h5>Vous etes divorce et sans enfant</h5></p>
+	{% endif %}
+	{% if app.session.get('situ') == 5 %}
+	<p><h5>Vous etes pacse et sans enfant</h5></p>
+	{% endif %}
+	{% if app.session.get('situ') == 6 %}
+	<p><h5>Vous etes en concubinage et sans enfant</h5></p>
+	{% endif %}
+	<p><strong>Age au deces</strong> {{age}} ans</p>
+	<p><strong>Vous avez</strong> {{enfant}} enfant(s)</p>
+	<p><strong>Valeur de votre residence:</strong> {{residencetotal| number_format(2, ',',' ')}} euros dont vous detenez {{pourcent_residence}}% en 
+{%if opt_residence == 0 %}
+en pleine propriete
+{% endif %}
+{%if opt_residence == 1 %}
+en SCI
+{% endif %}
+{%if opt_residence == 2 %}
+en indivision
+{% endif %}
+{%if opt_residence == 3 %}
+en Nue_propriete
+{% endif %}
+{%if opt_residence == 4 %}
+en Usufruit
+{% endif %}
+soit la valeur de {{residencefinal | number_format(2, ',', ' ')}} euros</p>
+	<p><strong>Montant de votre epargne:</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
+	<p><strong>Autre:</strong> {{autre|number_format(2,',',' ')}} euros</p>
+	<p><strong>Soit un patrimoine de</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>
+	<h2>Votre Bilan:</h2>
+	<table class="table table-hover">
+	<thead>
+	<tr>
+		<th>Revenant</th>
+		<th>Proportion</th>
+		<th>Valeur</th>
+		<th>Cout Droit de succession</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Part par enfant</td>
+		<td>1/{{enfant}} du patrimoine total</td>
+		<td>{{part| number_format(2,',',' ')}} euros</td>
+		<td>{{taxe| number_format(2,',',' ')}} euros</td>
+	</tr>
+	</tbody>
+	</table>
+{%endblock%}

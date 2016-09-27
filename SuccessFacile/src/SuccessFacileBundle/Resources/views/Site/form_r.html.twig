@@ -1,10 +1,10 @@
 	{% extends "SuccessFacileBundle::layout.html.twig" %}
 {% block body %}
-	<h3>Option Divorce et Famille recomposee</h3></br>
+	<h3> Votre age et decendants</h3></br>
 <div class="well">
-		<form action="{{path('D_R')}}" method="POST" {{form_enctype(form1)}}>
+		<form action="{{path('Form_R')}}" method="POST" {{form_enctype(form1)}}>
 			<div>
-				{{form_label(form1.age, "Age au deces (ans)")}}
+				{{form_label(form1.age, "Votre age (ans)")}}
 	 			{{form_errors(form1.age)}}
 				{{form_widget(form1.age)}}
 			</div>
@@ -23,22 +23,6 @@
 				{{form_label(form1.enfant_perso, "Nombre d'enfants a vous")}}
 				{{form_errors(form1.enfant_perso)}}
 				{{form_widget(form1.enfant_perso)}}
-			</div>
-			<h5>Patrimoine:</h5>
-			<div>
-				{{form_label(form1.residence, "Residence principale (en euros)")}}
-				{{form_errors(form1.residence)}}
-				{{form_widget(form1.residence)}}
-			</div>
-			<div>
-				{{form_label(form1.epargne, "Epargne (en euros)")}}
-				{{form_errors(form1.epargne)}}
-				{{form_widget(form1.epargne)}}
-			</div>
-			<div>
-				{{form_label(form1.autre, "Mobilier, vehicules et autres (en euros)")}}
-				{{form_errors(form1.autre)}}
-				{{form_widget(form1.autre)}}
 			</div>
 				{{form_rest(form1)}}
 			<input type="submit" id="formok" class= "btn btn">

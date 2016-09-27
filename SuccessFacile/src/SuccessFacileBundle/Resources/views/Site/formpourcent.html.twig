@@ -1,0 +1,13 @@
+	{% extends "SuccessFacileBundle::layout.html.twig" %}
+{% block body %}
+	<h3>Votre patrimoine</h3></br>
+<div class="well">
+		<form action="{{path('formpourcent')}}" method="POST" {{form_enctype(form1)}}>
+				{{form_label(form1.pourcent_residence, "Votre degre de propriete (en %)")}}
+				{{form_errors(form1.pourcent_residence)}}
+				{{form_widget(form1.pourcent_residence)}}
+				{{form_rest(form1)}}
+			<input type="submit" id="formok" class= "btn btn">
+		</form>
+</div>	
+{% endblock %}
