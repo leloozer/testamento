@@ -1,11 +1,13 @@
-<div class="row">
-<ul class="nav nav-tabs">
-	<li class="col-lg-3"><a href="{{ path('Acceuil')}}">Acceuil</a></li>
-	<li class="col-lg-3"><a href="{{ path('Simulateur')}}">Simulateur</a></li>
-	<li class="col-lg-3"><a href="{{ path('Combien')}}">Combien vais-je payez?</a></li>
-	<li class="col-lg-3"><a href="{{ path('Quotite')}}">Combien je peux leguer?</a></li>
-	<li class="col-lg-3"><a href="{{ path('About')}}">About</a></li>
-	<li class="col-lg-3"><a href="{{ path('Contact')}}">Contact</a></li>
+<nav class="navbar navbar-inverse">
+<div class=container>
+      <a class="navbar-brand" href="{{path('Acceuil')}}">SuccessionFacile</a>
+<ul class="nav navbar-nav">
+	<li><a href="{{ path('Simulateur')}}">H&eacute;ritiers</a></li>
+	<li><a href="{{ path('Combien')}}">Taxe</a></li>
+	<li><a href="{{ path('Quotite')}}">Quotit&eacute;</a></li>
+<!--
+	<li><a href="{{ path('About')}}">About</a></li>
+	<li><a href="{{ path('Contact')}}">Contact</a></li> !-->
 </ul>
 </div>
-
+</nav>

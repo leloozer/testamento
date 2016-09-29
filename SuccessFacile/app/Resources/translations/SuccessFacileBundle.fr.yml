@@ -1,0 +1,15 @@
+# ACCEUIL
+index:
+    titre: La succession transparente.
+    lead: Gr&acirc;ce &agrave; nos simulateurs de succession, d&eacute;couvrez qui sont vos h&eacute;ritiers en l'absence de testament, le montant de la taxe apr&egrave;s une succession et qu'elle est votre quotit&eacute; disponible.
+    gras1: Vous souhaitez conna&icirc;tre vos h&eacute;ritiers en l'absence de testament ?
+    p1: Le simulateur "H&eacute;ritiers" r&eacute;pondra &agrave; vos questions et vous apportera une r&eacute;ponse personnalis&eacute;e afin de prendre les bonnes dispositions testamentaires.
+    gras2: Vous souhaitez conna&icirc;tre le montant de la taxe apr&egrave;s un h&eacute;ritage?
+    p2: Le simulateur "Taxe" r&eacute;pondra &agrave; vos questions et vous apportera une r&eacute;ponse personnalis&eacute;e afin de ne pas avoir de mauvaises surprises.
+    gras3: Vous souhaitez faire un legs?
+    p3: Le simulateur "Quotit&eacute;" r&eacute;pondra &agrave; vos questions et vous apportera une r&eacute;ponse personnalis&eacute;e pour pr&eacute;parer votre legs dans les bonnes contitions.
+form:
+    situation: Quelle est votre situation familiale?
+    age: Votre âge (ans) ?
+    child: Nombre d'enfants ?
+

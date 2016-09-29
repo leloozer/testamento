@@ -1,21 +1,26 @@
 	{% extends "SuccessFacileBundle::layout.html.twig" %}
+{% trans_default_domain 'SuccessFacileBundle' %}
 {% block body %}
-	<h3>Votre age et votre descendance</h3></br>
-<div class="well">
+	<h5>Progression:</h5>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+    20%
+  </div>
+</div>
+<div class="form-group">
 		<form action="{{path('form_NR')}}" method="POST" {{form_enctype(form1)}}>
 			<div>
-				{{form_label(form1.age, "Votre age (ans)")}}
+				{{form_label(form1.age, 'form.age' |trans|raw)}}
 	 			{{form_errors(form1.age)}}
 				{{form_widget(form1.age)}}
 			</div>
-			<h5>Descendants:</h5>
 			<div>
-				{{form_label(form1.enfant, "Nombre d'enfants")}}
+				{{form_label(form1.enfant, 'form.child' | trans)}}
 				{{form_errors(form1.enfant)}}
 				{{form_widget(form1.enfant)}}
 			</div>
 				{{form_rest(form1)}}
-			<input type="submit" id="formok" class= "btn btn">
+			<input type="submit" id="formok" class= "btn btn-primary">
 		</form>
 </div>	
 {% endblock %}

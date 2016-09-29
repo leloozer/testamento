@@ -1,4 +1,27 @@
 	{% extends "SuccessFacileBundle::layout.html.twig" %}
+{% trans_default_domain 'SuccessFacileBundle' %}
 {% block body %}
-	ACCEUILLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+<div class="container">
+	<div class="jumbotron">
+		<h1>{{'index.titre' |trans }}</h1>
+		<p class="lead">{{'index.lead' |trans | raw}}</p>
+		</div>
+	<div class="row">
+		<div class="col-lg-4">
+		<p><strong>{{'index.gras1' |trans | raw}}</strong>
+{{'index.p1'|trans | raw}}<p>
+		<p><a class="btn btn-danger" href="{{path('Simulateur')}}" role="button">H&eacute;ritiers >></a></p>
+		</div>
+		<div class="col-lg-4">
+		<p><strong>{{'index.gras2' |trans | raw}}</strong>
+{{'index.p2' |trans | raw}}<p>
+		<p><a class="btn btn-success" href="{{path('Combien')}}" role="button">Taxe >></a></p>
+		</div>
+		<div class="col-lg-4">
+		<p><strong>{{'index.gras3' |trans |raw}}</strong> 
+{{'index.p3' |trans |raw}}<p>
+		<p><a class="btn btn-info" href="{{path('Quotite')}}" role="button">Quotit&eacute; >></a></p>
+	</div>
+	</div>
+</div>
 {% endblock %}

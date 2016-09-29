@@ -1,40 +1,55 @@
 	{% extends "SuccessFacileBundle::layout.html.twig"%}
 	{%block body %}
-	<h2>Votre Situation:</h2>
-	<p><h5>Vous etes marie et recompose avec enfant</h5></p>
-	<p><strong>Age au deces</strong> {{age}} ans</p>
-	<p><strong>Vous avez</strong> {{enfant_all}} enfant(s) dont {{enfant}} commun, {{enfant_conjoint}} de votre conjoint et {{enfant_perso}}</p>
-	<p><strong>Valeur de votre residence:</strong> {{residence| number_format(2, ',',' ')}} euros</p>
-	<p><strong>Montant de votre epargne:</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
+	<div class="container">
+	<div class="row">
+	<div class="col-lg-6">
+	<div class="alert alert-info">
+		<div style="text-align:center;text-inline">
+		<span class="glyphicon glyphicon-user" style="font-size:300%;"></span>
+		<h3>Votre situation</h3>
+		</div>
+	<p>Vous êtes marié(e)</p>
+	<p><strong>Vous avez</strong> {{age}} ans</p>
+	<p><strong>Vous avez</strong> {{enfant_all}} enfant(s) dont {{enfant}} commun, {{enfant_conjoint}} de votre conjoint et {{enfant_perso}} d'une précédente relation.</p>
+	<p>Les {{enfant_conjoint}} enfant(s) de votre conjoint n'ont pas de succession</p>
+	</div>
+	</div>
+	<div class="col-lg-6">
+	<div class="alert alert-info">
+		<div style="text-align:center;text-inline">
+		<span class="glyphicon glyphicon-euro" style="font-size:300%;"></span>
+		<h3>Votre patrimoine</h3>
+		</div>
+	<p><strong>Valeur de votre residence:</strong> {{residencetotal| number_format(2, ',',' ')}} euros dont vous détenez {{pourcent_residence}}% en 
+{%if opt_residence == 0 %}
+en pleine propriété
+{% endif %}
+{%if opt_residence == 1 %}
+en SCI
+{% endif %}
+{%if opt_residence == 2 %}
+en indivision
+{% endif %}
+{%if opt_residence == 3 %}
+en Nue_propriété
+{% endif %}
+{%if opt_residence == 4 %}
+en Usufruit
+{% endif %}
+soit la valeur de {{residencefinal | number_format(2, ',', ' ')}} euros</p>
+	<p><strong>Montant de votre épargne:</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
 	<p><strong>Autre:</strong> {{autre|number_format(2,',',' ')}} euros</p>
 	<p><strong>Soit un patrimoine de</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>
-	<h2>Votre Bilan:</h2>
+	</div>
+	</div>
+	<div class="container">
+		<div style="text-align:center;text-inline">
+		<span class="glyphicon glyphicon-stats" style="font-size:300%;"></span>
+		<h3>Votre Bilan</h3>
+	</div>
 	<table class="table table-hover">
 	<thead>
-	<tr>
-		<th>Revenant</th>
-		<th>Proportion</th>
-		<th>Valeur</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>Au conjoint survivant</td>
-		<td>1/2 du patrimoine total</td>
-		<td>{{revenant| number_format(2,',',' ')}} euros</td>
-	</tr>
-	<tr>
-		<td>A la succession</td>
-		<td>1/2 du patrimoine total</td>
-		<td>{{revenant| number_format(2,',', ' ')}} euros</td>
-	</tr>
-	</tbody>
-	</table>
-	<h2>Vos Solutions:</h2>
-	<p>Les {{enfant_conjoint}} enfants de votre conjoint n'ont pas de succession</p>
-	<table class="table table-hover">
-	<thead>
-	<tr>
+	<tr class="warning">
 		<th>Votre repartition</th>
 		<th>Valeur recu</th>
 		<th>Cout taxe de succession</th>

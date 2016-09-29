@@ -1,29 +1,35 @@
 	{% extends "SuccessFacileBundle::layout.html.twig" %}
 {% block body %}
-	<h3>Votre patrimoine</h3></br>
-<div class="well">
+	<h5>Progression:</h5>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+    40%
+  </div>
+</div>
+<div class="form-group">
 		<form action="{{path('formpatrimoine')}}" method="POST" {{form_enctype(form1)}}>
-			<h5>Patrimoine:</h5>
 			<div>
-				{{form_label(form1.residence, "Residence principale (en euros)")}}
+				{{form_label(form1.residence, "Résidence principale (en euros)")}}
 				{{form_errors(form1.residence)}}
 				{{form_widget(form1.residence)}}
-				{{form_label(form1.opt_residence, "Degre de propriete")}}
+			</div>
+			<div>
+				{{form_label(form1.opt_residence, "Degré de propriété")}}
 				{{form_errors(form1.opt_residence)}}
 				{{form_widget(form1.opt_residence)}}
 			</div>
 			<div>
-				{{form_label(form1.epargne, "Epargne (en euros)")}}
+				{{form_label(form1.epargne, "Épargne (en euros)")}}
 				{{form_errors(form1.epargne)}}
 				{{form_widget(form1.epargne)}}
 			</div>
 			<div>
-				{{form_label(form1.autre, "Mobilier, vehicules et autres (en euros)")}}
+				{{form_label(form1.autre, "Mobilier, véhicules et autres (en euros)")}}
 				{{form_errors(form1.autre)}}
 				{{form_widget(form1.autre)}}
 			</div>
 				{{form_rest(form1)}}
-			<input type="submit" id="formok" class= "btn btn">
+			<input type="submit" id="formok" class= "btn btn-primary">
 		</form>
 </div>	
 {% endblock %}

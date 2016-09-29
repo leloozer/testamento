@@ -8,7 +8,21 @@
 		<span class="glyphicon glyphicon-user" style="font-size:300%;"></span>
 		<h3>Votre situation</h3>
 		</div>
-	<p>Vous êtes mariée</p>
+	{% if app.session.get('situ') == 0 %}
+	<p><h5>Vous êtes célibataire</h5></p>
+	{% endif %}
+	{% if app.session.get('situ') == 2 %}
+	<p><h5>Vous êtes veuf(ve)</h5></p>
+	{% endif %}
+	{% if app.session.get('situ') == 3 %}
+	<p><h5>Vous êtes divorcé(e)</h5></p>
+	{% endif %}
+	{% if app.session.get('situ') == 5 %}
+	<p><h5>Vous êtes partenaire d'un PACS</h5></p>
+	{% endif %}
+	{% if app.session.get('situ') == 6 %}
+	<p><h5>Vous êtes en concubinage</h5></p>
+	{% endif %}
 	<p>Vous avez {{age}} ans</p>
 	<p>Vous n'avez pas d'enfant</p>
 	<p>En l'absence de conjoint et d'enfants, les héritiers réservataires sont les ascendants et/ou les frères et soeurs.</p>
@@ -50,7 +64,6 @@ en Nue_propriété
 en Usufruit
 {% endif %}
 soit la valeur de {{residencefinal | number_format(2, ',', ' ')}} euros</p>
-	
 	<p><strong>Montant de votre épargne:</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
 	<p><strong>Autre:</strong> {{autre|number_format(2,',',' ')}} euros</p>
 	<p><strong>Soit un patrimoine de</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>
@@ -63,55 +76,39 @@ soit la valeur de {{residencefinal | number_format(2, ',', ' ')}} euros</p>
 		</div>
 	<table class="table table-hover">
 	<thead>
-	<h4>Si vous avez fait une donation entre époux</h4>
 	<tr class="warning">
 		<th>Revenant</th>
 		<th>Proportion</th>
 		<th>Valeur</th>
-		<th>Taxe droit de succession</th>
+		<th>Cout Droit de succession</th>
 	</tr>
 	</thead>
 	<tbody>
+	{% if mere == TRUE or pere == TRUE%}
 	<tr>
-		<td>Le conjoint survivant</td>
-		<td>100% du patrimoine du defunt</td>
-		<td>{{part| number_format(2,',',' ')}} euros</td>
-		<td>0 euros</td>
-	</tr>
-	</tbody>
-	</table>
-	<h4>Si vous n'en avez pas faite</h4>
-	<table class="table table-hover">
-	<thead>
-	<tr class="warning">
-		<th>Revenant</th>
-		<th>Proportion</th>
-		<th>Valeur</th>
-		<th>Taxe droit de succession</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>Le conjoint survivant</td>
-		{%if mere == TRUE and pere == TRUE %}	
-		<td>50% du patrimoine du defunt</td>
-		{% elseif mere == TRUE or pere == TRUE %}	
-		<td>75% du patrimoine du defunt</td>
-		{% elseif mere == FALSE and pere == FALSE %}	
-		<td>100% du patrimoine du defunt</td>
-		{%endif%}
-		<td>{{partM| number_format(2,',',' ')}} euros</td>
-		<td>0 euros</td>
-	</tr>
-	<tr>
-		<td>Part par parent survivant</td>
-		{%if mere == TRUE or pere == TRUE %}	
-		<td>25% du patrimoine du defunt</td>
-		{%endif%}
+		<td>Part par parent vivant</td>
+		 {% if siblings == 0 and mere == TRUE and pere == TRUE %}
+		<td> 100% du patrimoine total</td>
+		 {% elseif siblings == 0 %}
+		<td> 50% du patrimoine total</td>
+		{% endif %}
+		 {% if siblings != 0 %}
+		<td> 25% du patrimoine total</td>
+		{% endif %}
 		<td>{{partP| number_format(2,',',' ')}} euros</td>
 		<td>{{taxeP| number_format(2,',',' ')}} euros</td>
 	</tr>
+	{% endif %}
+		 {% if siblings != 0 %}
+	<tr>
+		<td>Part par frère et soeur</td>
+		<td> {{pourcentE}}% du patrimoine total</td>
+		<td>{{partE| number_format(2,',',' ')}} euros</td>
+		<td>{{taxeE| number_format(2,',',' ')}} euros</td>
+	</tr>
+		{% endif %}
 	</tbody>
 	</table>
+	</div>
 {%endblock%}
 

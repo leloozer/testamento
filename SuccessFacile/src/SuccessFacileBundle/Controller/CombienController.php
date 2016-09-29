@@ -18,8 +18,8 @@ Class CombienController extends Controller
 		$formBuilder = $this->createFormBuilder($combien);
 		$formBuilder
 				->add ('somme', 'integer')
-				->add('handicap', 'choice', array('choices'=>array(0 => 'Je ne suis pas handicape', 1=>'Je suis handicape')))
-				->add('lien', 'choice', array('choices'=>array(0 => 'epoux(se)', 8=>'partenaire de PACS', 1=>'pere/mere ou autre ascendant', 2=>'fille/fils', 3=>'petit-enfant ou arriere petit enfant', 4=> 'frere/soeur', 5=>'neveu ou niece', 6=>'parent jusqu au 4eme degre inclus', 7=>'Autre')));
+				->add('handicap', 'choice', array('choices'=>array(0 => 'Je ne suis pas handicapé(e)', 1=>'Je suis handicapé(e)')))
+				->add('lien', 'choice', array('choices'=>array(0 => 'époux(se)', 8=>'partenaire de PACS', 1=>'père/mère ou autre ascendant', 2=>'fille/fils', 3=>'petit-enfant ou arrière petit enfant', 4=> 'frère/soeur', 5=>'neveu ou nièce', 6=>'parent jusqu\'au 4ème degré inclus', 7=>'Autre')));
 		
 		$form = $formBuilder->getForm();
 

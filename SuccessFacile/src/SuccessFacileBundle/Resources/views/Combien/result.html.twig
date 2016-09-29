@@ -1,47 +1,57 @@
 	{% extends "SuccessFacileBundle::layout.html.twig"%}
 	{%block body %}
-	<h2>Votre Situation:</h2>
+	<div class="container">
+	<div class="row">
+	<div class="col-lg-15">
+	<div class="alert alert-info">
+		<div style="text-align:center;text-inline">
+		<span class="glyphicon glyphicon-user" style="font-size:300%;"></span>
+		<h3>Votre situation</h3>
+		</div>
 	{% if handicap == TRUE %}
-		<p>Vous etes handicape.</p>
+		<p>Vous êtes handicapé(e).</p>
 	{% endif %}
 	{% if handicap == FALSE %}
-		<p>Vous n'etes pas handicape.</p>
+		<p>Vous n'êtes pas handicapé(e).</p>
 	{% endif %}
 	{% if lien == 0 %}
-	<p>Vous etes le mari du defunt.</p>
+	<p>Vous êtes le mari du défunt.</p>
 	{% endif %}
 	{% if lien == 1 %}
-	<p>Vous etes un ascendant direct du defunt.</p>
+	<p>Vous êtes un ascendant direct du défunt.</p>
 	{% endif %}
 	{% if lien == 2 %}
-	<p>Vous etes le fils ou la fils du defunt.</p>
+	<p>Vous êtes le fils ou la fille du défunt.</p>
 	{% endif %}
 	{% if lien == 3 %}
-	<p>Vous etes le petit-fils/petite-fille ou arriere-petit-fils/arriere-petite-fille du defunt.</p>
+	<p>Vous êtes le petit-fils/petite-fille ou arrière-petit-fils/arrière-petite-fille du défunt.</p>
 	{% endif %}
 	{% if lien == 4 %}
-	<p>Vous etes le frere ou la soeur du defunt.</p>
+	<p>Vous êtes le frère ou la soeur du défunt.</p>
 	{% endif %}
 	{% if lien == 5 %}
-	<p>Vous etes le neveu ou la niece du defunt.</p>
+	<p>Vous êtes le neveu ou la nièce du défunt.</p>
 	{% endif %}
 	{% if lien == 6 %}
-	<p>Vous etes parent jusqu'au 4eme degre inclus du defunt.</p>
+	<p>Vous êtes parent jusqu'au 4ème degré inclus du défunt.</p>
 	{% endif %}
 	{% if lien == 7 %}
-	<p>Vous etes sans lien de sang avec le defunt ou parent du 5eme degre minimum.</p>
+	<p>Vous êtes sans lien de sang avec le défunt ou parent du 5ème degré minimum.</p>
 	{% endif %}
 	{% if lien == 8 %}
-	<p>Vous etes le partenaire de PACS du defunt.</p>
+	<p>Vous êtes le partenaire de PACS du défunt.</p>
 	{% endif %}
-	<h2>Votre Bilan:</h2>
 	{% if lien == 8 %}
 	<p>Le partenaire d'un PACS n'a pas de vocation successorale sauf dispositions testamentaires.</p>
 	{% endif %}
-	<h6>Le montant de la taxe a payer</h6>
+	</div>
+		<div style="text-align:center;text-inline">
+		<span class="glyphicon glyphicon-usd" style="font-size:300%;"></span>
+		<h3>Votre Bilan</h3>
+		</div>
 	<table class="table table-hover">
 	<thead>
-	<tr>
+	<tr class="success">
 		<th>Votre heritage</th>
 		<th>Cout Droit de succession</th>
 		<th>Heritage apres payement de la taxe</th>

@@ -1,17 +1,23 @@
 	{% extends "SuccessFacileBundle::layout.html.twig" %}
 {% block body %}
-	<h2>Vous n avez plus vos parents et vous etes enfant unique </h2></br>
-<div class="well">
+	<h5>Progression:</h5>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+    100%
+  </div>
+</div>
+<div class="form-group">
 		<form action={{path('gp')}} method="POST" {{form_enctype(form)}}>
 			<div>
-				{{form_label(form.gppaternel, "Vos grands-parents paternel sont")}}
+				{{form_label(form.gppaternel, "Vos grands-parents paternels sont")}}
 	 			{{form_errors(form.gppaternel)}}
 				{{form_widget(form.gppaternel)}}
-				{{form_label(form.gpmaternel, "Vos grands-parents maternel sont")}}
+			</div>
+				{{form_label(form.gpmaternel, "Vos grands-parents maternels sont")}}
 	 			{{form_errors(form.gpmaternel)}}
 				{{form_widget(form.gpmaternel)}}
 				{{form_rest(form)}}
-			<input type="submit" id="formok" class= "btn btn">
+			<input type="submit" id="formok" class= "btn btn-primary">
 		</form>
 </div>	
 {% endblock %}

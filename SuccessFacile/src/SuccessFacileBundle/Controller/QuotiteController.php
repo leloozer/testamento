@@ -19,7 +19,7 @@ Class QuotiteController extends Controller
 		$formBuilder
 				->add ('patrimoine', 'integer')
 				->add ('child', 'integer')
-				->add ('marie', 'choice', array('choices'=>array(1=>'Vous etes marie', 0=>'Vous n etes pas marie')));
+				->add ('marie', 'choice', array('choices'=>array(1=>'Vous êtes marié(e)', 0=>'Vous n\'êtes pas marié(e)')));
 		
 		$form = $formBuilder->getForm();
 
@@ -39,6 +39,10 @@ Class QuotiteController extends Controller
 				if ($child == 0)
 				{
 					$pourcentQD = 100;
+				}
+				if ($child == 0 && $marie == TRUE)
+				{
+					$pourcentQD = 75;
 				}	
 				if ($child == 1)
 				{

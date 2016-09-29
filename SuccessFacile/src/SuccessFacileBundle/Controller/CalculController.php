@@ -24,7 +24,7 @@ class CalculController extends Controller
 
 		$formBuilder = $this->createFormBuilder($situation);
 		$formBuilder 
-					->add('situ', 'choice', array('choices'=>array(0=>'Celibataire', 1=>'Marie(e)', 2=>'Veuf(ve)', 3=>'Divorce(e)', 5=>'Partenaire d\'un PACS', 6=>'En concubinage')));
+					->add('situ', 'choice', array('choices'=>array(0=>'Célibataire', 1=>'Marié(e)', 2=>'Veuf(ve)', 3=>'Divorcé(e)', 5=>'Partenaire d\'un PACS', 6=>'En concubinage')));
 		$form = $formBuilder->getForm();
 		
 		$request = $this->getRequest();
@@ -86,7 +86,7 @@ class CalculController extends Controller
 
 		$formBuilder = $this->createFormBuilder($situation);
 		$formBuilder 
-					->add('recompose', 'choice', array('choices'=>array(0=>'Famille non recompose', 1=>'Famille recompose')));
+					->add('recompose', 'choice', array('choices'=>array(0=>'Famille non recomposée', 1=>'Famille recomposée')));
 		$form = $formBuilder->getForm();
 		
 		$request = $this->getRequest();
@@ -189,7 +189,7 @@ class CalculController extends Controller
 		$formBuilder = $this->createFormBuilder($usufruit);
 		$formBuilder
 			->add('residence', 'integer')
-			->add('opt_residence', 'choice', array('choices'=>array(0=>'Pleine propriete', 1=>'SCI', 2=>'indivision', 3=>'Nue_propriete', 4=>'Usufruit')))
+			->add('opt_residence', 'choice', array('choices'=>array(0=>'Pleine propriété', 1=>'SCI', 2=>'indivision', 3=>'Nue_propriété', 4=>'Usufruit')))
 			->add('epargne', 'integer')
 			->add('autre', 'integer');
 		$form = $formBuilder->getForm();
@@ -297,8 +297,8 @@ class CalculController extends Controller
 		$nochild = new Situnochild;
 		$formBuilder = $this->createFormBuilder($nochild);
 		$formBuilder
-			->add('maman', 'choice', array('choices'=>array(1=>'Vivant', 0=>'Decede')))
-			->add('papa', 'choice', array('choices'=>array(1=>'Vivant', 0=>'Decede')))
+			->add('maman', 'choice', array('choices'=>array(1=>'Vivante', 0=>'Décédée')))
+			->add('papa', 'choice', array('choices'=>array(1=>'Vivant', 0=>'Décédé')))
 			->add('siblings', 'integer');
 		$form = $formBuilder->getForm();
 		
@@ -342,8 +342,8 @@ class CalculController extends Controller
 		$GP = new Situnochild;
 		$formBuilder = $this->createFormBuilder($GP);
 		$formBuilder
-			->add('gppaternel', 'choice', array('choices'=>array(1=>'Vivant', 0=>'Decede')))
-			->add('gpmaternel', 'choice', array('choices'=>array(1=>'Vivant', 0=>'Decede')));
+			->add('gppaternel', 'choice', array('choices'=>array(1=>'Vivants', 0=>'Decedes')))
+			->add('gpmaternel', 'choice', array('choices'=>array(1=>'Vivants', 0=>'Décédés')));
 		$form = $formBuilder->getForm();
 		
 		$request = $this->getRequest();
@@ -515,10 +515,13 @@ class CalculController extends Controller
 			$enfant = $session->get('enfant');
 		$opt_residence = $session->get('opt_residence');
 		$pourcent_residence = $session->get('pourcent_residence');
-			$residence = $session->get('residence');
+			$residencetotal = $session->get('residence');
 			$epargne = $session->get('epargne');
 			$autre = $session->get('autre');
-			$patrimoine = $residence + $epargne + $autre;
+			
+
+			$residencefinal = $residencetotal * $pourcent_residence / 100;
+			$patrimoine = $residencefinal + $epargne + $autre;
 
 			$tax = $this->container->get('oc_platform.droitsuccess');
 			if ($siblings == 0 && $pere == TRUE && $mere == TRUE)
@@ -563,7 +566,7 @@ class CalculController extends Controller
 			}
 		}
 
-		return $this->render('SuccessFacileBundle:Site:resultatc_ne.html.twig', array('age' => $age, 'enfant'=>$enfant, 'residence'=>$residence, 'epargne'=>$epargne, 
+		return $this->render('SuccessFacileBundle:Site:resultatbase_ne.html.twig', array('age' => $age, 'enfant'=>$enfant, 'residencetotal'=>$residencetotal, 'opt_residence'=>$opt_residence, 'pourcent_residence'=>$pourcent_residence, 'residencefinal'=>$residencefinal, 'epargne'=>$epargne, 
 		'autre'=>$autre, 'patrimoine'=>$patrimoine, 'pere'=>$pere, 'mere'=>$mere, 'siblings'=>$siblings, 'partP'=>$partP, 'taxeP'=>$taxeP, 'partE'=>$partE, 'taxeE'=>$taxeE, 'pourcentE'=>$pourcentE));
 	}
 
@@ -575,12 +578,15 @@ class CalculController extends Controller
 		$session = $this->getRequest()->getSession();
 		$age = $session->get('age');
 		$enfant = $session->get('enfant');
-		$residence = $session->get('residence');
+		$residencetotal = $session->get('residence');
 		$opt_residence = $session->get('opt_residence');
 		$pourcent_residence = $session->get('pourcent_residence');
 		$epargne = $session->get('epargne');
 		$autre = $session->get('autre');
-		$patrimoine = $residence + $epargne + $autre;
+		
+		$residencefinal = $residencetotal * $pourcent_residence / 100;
+		$patrimoine = $residencefinal + $epargne + $autre;
+
 		$part = $patrimoine / 2;
 		$partP = 0;
 		$taxeP = 0;
@@ -600,8 +606,8 @@ class CalculController extends Controller
 			$taxeP = $tax->Taxecumule0($partP);
 		}
 
-		return $this->render('SuccessFacileBundle:Site:resultatm_ne.html.twig', array('age' => $age, 'enfant'=>$enfant, 'residence'=>$residence, 'epargne'=>$epargne, 
-		'autre'=>$autre, 'patrimoine'=>$patrimoine, 'part'=>$part, 'partP'=>$partP, 'taxeP'=>$taxeP, 'mere'=>$mere, 'pere'=>$pere, 'partM'=>$partM));
+		return $this->render('SuccessFacileBundle:Site:resultatm_ne.html.twig', array('age' => $age, 'enfant'=>$enfant, 'residencetotal'=>$residencetotal, 'opt_residence'=>$opt_residence, 'pourcent_residence'=>$pourcent_residence, 'residencefinal'=>$residencefinal, 'epargne'=>$epargne, 
+		'autre'=>$autre, 'patrimoine'=>$patrimoine, 'part'=>$part, 'partP'=>$partP, 'taxeP'=>$taxeP, 'mere'=>$mere, 'siblings'=>$siblings, 'pere'=>$pere, 'partM'=>$partM));
 	}
 
 	public function V_NEresultAction($pere, $mere, $siblings)
@@ -619,12 +625,14 @@ class CalculController extends Controller
 			$session = $this->getRequest()->getSession();
 			$age = $session->get('age');
 			$enfant = $session->get('enfant');
-			$residence = $session->get('residence');
+			$residencetotal = $session->get('residence');
 		$opt_residence = $session->get('opt_residence');
 		$pourcent_residence = $session->get('pourcent_residence');
 			$epargne = $session->get('epargne');
 			$autre = $session->get('autre');
-			$patrimoine = $residence + $epargne + $autre;
+		
+			$residencefinal = $residencetotal * $pourcent_residence / 100;
+			$patrimoine = $residencefinal + $epargne + $autre;
 			
 			$tax = $this->container->get('oc_platform.droitsuccess');
 			if ($siblings == 0 && $pere == TRUE && $mere == TRUE)
@@ -669,7 +677,7 @@ class CalculController extends Controller
 			}
 		}
 
-		return $this->render('SuccessFacileBundle:Site:resultatc_ne.html.twig', array('age' => $age, 'enfant'=>$enfant, 'residence'=>$residence, 'epargne'=>$epargne, 
+		return $this->render('SuccessFacileBundle:Site:resultatbase_ne.html.twig', array('age' => $age, 'enfant'=>$enfant, 'residencetotal'=>$residencetotal, 'opt_residence'=>$opt_residence, 'pourcent_residence'=>$pourcent_residence, 'residencefinal'=>$residencefinal, 'epargne'=>$epargne, 
 		'autre'=>$autre, 'patrimoine'=>$patrimoine, 'pere'=>$pere, 'mere'=>$mere, 'siblings'=>$siblings, 'partP'=>$partP, 'taxeP'=>$taxeP, 'partE'=>$partE, 'taxeE'=>$taxeE, 'pourcentE'=>$pourcentE));
 	}
 	
@@ -688,12 +696,14 @@ class CalculController extends Controller
 			$session = $this->getRequest()->getSession();
 			$age = $session->get('age');
 			$enfant = $session->get('enfant');
-			$residence = $session->get('residence');
+			$residencetotal = $session->get('residence');
 		$opt_residence = $session->get('opt_residence');
 		$pourcent_residence = $session->get('pourcent_residence');
 			$epargne = $session->get('epargne');
 			$autre = $session->get('autre');
-			$patrimoine = $residence + $epargne + $autre;
+		
+			$residencefinal = $residencetotal * $pourcent_residence / 100;
+			$patrimoine = $residencefinal + $epargne + $autre;
 			
 			$tax = $this->container->get('oc_platform.droitsuccess');
 			if ($siblings == 0 && $pere == TRUE && $mere == TRUE)
@@ -738,7 +748,7 @@ class CalculController extends Controller
 			}
 		}
 
-		return $this->render('SuccessFacileBundle:Site:resultatc_ne.html.twig', array('age' => $age, 'enfant'=>$enfant, 'residence'=>$residence, 'epargne'=>$epargne, 
+		return $this->render('SuccessFacileBundle:Site:resultatbase_ne.html.twig', array('age' => $age, 'enfant'=>$enfant, 'residencetotal'=>$residencetotal, 'opt_residence'=>$opt_residence, 'pourcent_residence'=>$pourcent_residence, 'residencefinal'=>$residencefinal, 'epargne'=>$epargne, 
 		'autre'=>$autre, 'patrimoine'=>$patrimoine, 'pere'=>$pere, 'mere'=>$mere, 'siblings'=>$siblings, 'partP'=>$partP, 'taxeP'=>$taxeP, 'partE'=>$partE, 'taxeE'=>$taxeE, 'pourcentE'=>$pourcentE));
 	}
 	public function Ec_NEresultAction($pere, $mere, $siblings)
@@ -756,13 +766,14 @@ class CalculController extends Controller
 			$session = $this->getRequest()->getSession();
 			$age = $session->get('age');
 			$enfant = $session->get('enfant');
-			$residence = $session->get('residence');
+			$residencetotal = $session->get('residence');
 		$opt_residence = $session->get('opt_residence');
 		$pourcent_residence = $session->get('pourcent_residence');
 			$epargne = $session->get('epargne');
 			$autre = $session->get('autre');
-			$patrimoine = $residence + $epargne + $autre;
 			
+			$residencefinal = $residencetotal * $pourcent_residence / 100;
+			$patrimoine = $residencefinal + $epargne + $autre;
 			$tax = $this->container->get('oc_platform.droitsuccess');
 			if ($siblings == 0 && $pere == TRUE && $mere == TRUE)
 			{
@@ -805,7 +816,7 @@ class CalculController extends Controller
 				$taxeE = $tax->Taxecumule1($partE);	
 			}
 		}
-		return $this->render('SuccessFacileBundle:Site:resultatc_ne.html.twig', array('age' => $age, 'enfant'=>$enfant, 'residence'=>$residence, 'epargne'=>$epargne, 
+		return $this->render('SuccessFacileBundle:Site:resultatbase_ne.html.twig', array('age' => $age, 'enfant'=>$enfant, 'residencetotal'=>$residencetotal, 'opt_residence'=>$opt_residence, 'pourcent_residence'=>$pourcent_residence, 'residencefinal'=>$residencefinal, 'epargne'=>$epargne, 
 		'autre'=>$autre, 'patrimoine'=>$patrimoine, 'pere'=>$pere, 'mere'=>$mere, 'siblings'=>$siblings, 'partP'=>$partP, 'taxeP'=>$taxeP, 'partE'=>$partE, 'taxeE'=>$taxeE, 'pourcentE'=>$pourcentE));
 
 	}
@@ -825,12 +836,14 @@ class CalculController extends Controller
 			$session = $this->getRequest()->getSession();
 			$age = $session->get('age');
 			$enfant = $session->get('enfant');
-			$residence = $session->get('residence');
+			$residencetotal = $session->get('residence');
 		$opt_residence = $session->get('opt_residence');
 		$pourcent_residence = $session->get('pourcent_residence');
 			$epargne = $session->get('epargne');
 			$autre = $session->get('autre');
-			$patrimoine = $residence + $epargne + $autre;
+			
+			$residencefinal = $residencetotal * $pourcent_residence / 100;
+			$patrimoine = $residencefinal + $epargne + $autre;
 			
 			$tax = $this->container->get('oc_platform.droitsuccess');
 			if ($siblings == 0 && $pere == TRUE && $mere == TRUE)
@@ -874,7 +887,7 @@ class CalculController extends Controller
 				$taxeE = $tax->Taxecumule1($partE);	
 			}
 		}
-		return $this->render('SuccessFacileBundle:Site:resultatc_ne.html.twig', array('age' => $age, 'enfant'=>$enfant, 'residence'=>$residence, 'epargne'=>$epargne, 
+		return $this->render('SuccessFacileBundle:Site:resultatbase_ne.html.twig', array('age' => $age, 'enfant'=>$enfant, 'residencetotal'=>$residencetotal, 'opt_residence'=>$opt_residence, 'pourcent_residence'=>$pourcent_residence, 'residencefinal'=>$residencefinal, 'epargne'=>$epargne, 
 		'autre'=>$autre, 'patrimoine'=>$patrimoine, 'pere'=>$pere, 'mere'=>$mere, 'siblings'=>$siblings, 'partP'=>$partP, 'taxeP'=>$taxeP, 'partE'=>$partE, 'taxeE'=>$taxeE, 'pourcentE'=>$pourcentE));
 	}
 
@@ -889,7 +902,7 @@ class CalculController extends Controller
 	public function M_RresultAction()
 	{
 		$session = $this->getRequest()->getSession();
-		$residence = $session->get('residence');
+		$residencetotal = $session->get('residence');
 		$opt_residence = $session->get('opt_residence');
 		$pourcent_residence = $session->get('pourcent_residence');
 		$enfant_conjoint = $session->get('enfant_conjoint');
@@ -900,7 +913,9 @@ class CalculController extends Controller
 		$enfant = $session->get('enfant');
 
 
-		$patrimoine = $residence + $epargne + $autre;
+		$residencefinal = $residencetotal * $pourcent_residence / 100;
+		$patrimoine = $residencefinal + $epargne + $autre;
+		
 		$enfant_all = $enfant + $enfant_conjoint + $enfant_perso;
 		$enfant_part = $enfant_all - $enfant_conjoint;
 		$revenant = $patrimoine / 2;
@@ -910,7 +925,7 @@ class CalculController extends Controller
 		$enfant_opt2 = $revenant * 3 / 4 / $enfant_part;
 		$tax = $this->container->get('oc_platform.droitsuccess');
 		$taxe = $tax->Taxecumule0($enfant_opt2);
-		return $this->render('SuccessFacileBundle:Site:resultatm_r.html.twig', array('age' => $age, 'enfant_all'=>$enfant_all, 'enfant_part'=>$enfant_part, 'enfant'=>$enfant, 'enfant_conjoint'=>$enfant_conjoint, 'enfant_perso'=>$enfant_perso, 'revenant'=>$revenant, 'conjoint_opt2'=>$conjoint_opt2, 'enfant_opt2'=>$enfant_opt2, 'residence'=>$residence, 'epargne'=>$epargne, 
+		return $this->render('SuccessFacileBundle:Site:resultatm_r.html.twig', array('age' => $age, 'enfant_all'=>$enfant_all, 'enfant_part'=>$enfant_part, 'enfant'=>$enfant, 'enfant_conjoint'=>$enfant_conjoint, 'enfant_perso'=>$enfant_perso, 'revenant'=>$revenant, 'conjoint_opt2'=>$conjoint_opt2, 'enfant_opt2'=>$enfant_opt2, 'residencetotal'=>$residencetotal, 'opt_residence'=>$opt_residence, 'pourcent_residence'=>$pourcent_residence, 'residencefinal'=>$residencefinal, 'epargne'=>$epargne, 
 		'autre'=>$autre, 'patrimoine'=>$patrimoine, 'taxe'=>$taxe));
 	}
 
@@ -919,7 +934,7 @@ class CalculController extends Controller
 	public function Ec_RresultAction()
 	{
 		$session = $this->getRequest()->getSession();
-		$residence = $session->get('residence');
+		$residencetotal = $session->get('residence');
 		$opt_residence = $session->get('opt_residence');
 		$pourcent_residence = $session->get('pourcent_residence');
 		$enfant_conjoint = $session->get('enfant_conjoint');
@@ -929,14 +944,16 @@ class CalculController extends Controller
 		$age = $session->get('age');
 		$enfant = $session->get('enfant');
 
-		$patrimoine = $residence + $epargne + $autre;
+		$residencefinal = $residencetotal * $pourcent_residence / 100;
+		$patrimoine = $residencefinal + $epargne + $autre;
+		
 		$enfant_all = $enfant + $enfant_conjoint + $enfant_perso;
 		$enfant_part = $enfant_all - $enfant_conjoint;
 		$part = $patrimoine / $enfant_part;
 
 		$tax = $this->container->get('oc_platform.droitsuccess');
 		$taxe = $tax->Taxecumule0($part);
-		return $this->render('SuccessFacileBundle:Site:resultatec_r.html.twig', array('age' => $age, 'enfant_all'=>$enfant_all, 'enfant_part'=>$enfant_part, 'enfant'=>$enfant, 'enfant_conjoint'=>$enfant_conjoint, 'enfant_perso'=>$enfant_perso, 'residence'=>$residence, 'epargne'=>$epargne, 
+		return $this->render('SuccessFacileBundle:Site:resultatec_r.html.twig', array('age' => $age, 'enfant_all'=>$enfant_all, 'enfant_part'=>$enfant_part, 'enfant'=>$enfant, 'enfant_conjoint'=>$enfant_conjoint, 'enfant_perso'=>$enfant_perso, 'residencetotal'=>$residencetotal, 'opt_residence'=>$opt_residence, 'pourcent_residence'=>$pourcent_residence, 'residencefinal'=>$residencefinal, 'epargne'=>$epargne, 
 		'autre'=>$autre, 'patrimoine'=>$patrimoine, 'part'=>$part, 'taxe'=>$taxe));
 	}
 
@@ -945,7 +962,7 @@ class CalculController extends Controller
 	public function P_RresultAction()
 	{
 		$session = $this->getRequest()->getSession();
-		$residence = $session->get('residence');
+		$residencetotal = $session->get('residence');
 		$opt_residence = $session->get('opt_residence');
 		$pourcent_residence = $session->get('pourcent_residence');
 		$enfant_conjoint = $session->get('enfant_conjoint');
@@ -955,14 +972,16 @@ class CalculController extends Controller
 		$age = $session->get('age');
 		$enfant = $session->get('enfant');
 
-		$patrimoine = $residence + $epargne + $autre;
+		$residencefinal = $residencetotal * $pourcent_residence / 100;
+		$patrimoine = $residencefinal + $epargne + $autre;
+		
 		$enfant_all = $enfant + $enfant_conjoint + $enfant_perso;
 		$enfant_part = $enfant_all - $enfant_conjoint;
 		$part = $patrimoine / $enfant_part;
 
 		$tax = $this->container->get('oc_platform.droitsuccess');
 		$taxe = $tax->Taxecumule0($part);
-		return $this->render('SuccessFacileBundle:Site:resultatp_r.html.twig', array('age' => $age, 'enfant_all'=>$enfant_all, 'enfant_part'=>$enfant_part, 'enfant'=>$enfant, 'enfant_conjoint'=>$enfant_conjoint, 'enfant_perso'=>$enfant_perso, 'residence'=>$residence, 'epargne'=>$epargne, 
+		return $this->render('SuccessFacileBundle:Site:resultatp_r.html.twig', array('age' => $age, 'enfant_all'=>$enfant_all, 'enfant_part'=>$enfant_part, 'enfant'=>$enfant, 'enfant_conjoint'=>$enfant_conjoint, 'enfant_perso'=>$enfant_perso, 'residencetotal'=>$residencetotal, 'opt_residence'=>$opt_residence, 'pourcent_residence'=>$pourcent_residence, 'residencefinal'=>$residencefinal, 'epargne'=>$epargne, 
 		'autre'=>$autre, 'patrimoine'=>$patrimoine, 'part'=>$part, 'taxe'=>$taxe));
 	}
 }

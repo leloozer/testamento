@@ -1,22 +1,23 @@
 	{% extends "SuccessFacileBundle::layout.html.twig" %}
 {% block body %}
-	<h2>Combiem je peux leguer ?</h2></br>
-<div class="well">
+<div class="form-group">
 		<form method="POST" {{form_enctype(form)}}>
 			{{form_errors(form)}}
 			<div>
 				{{form_label(form.patrimoine, "Montant de votre patrimoine (en euros)")}}
 	 			{{form_errors(form.patrimoine)}}
 				{{form_widget(form.patrimoine)}}
-				{{form_label(form.marie, "Etes vous marie ?")}}
+			</div>
+			<div>
+				{{form_label(form.marie, "Etes vous marié(e)?")}}
 	 			{{form_errors(form.marie)}}
 				{{form_widget(form.marie)}}
 			</div>
-				{{form_label(form.child, "Combien avez vous d'enfant ?")}}
+				{{form_label(form.child, "Combien avez-vous d'enfant?")}}
 	 			{{form_errors(form.child)}}
 				{{form_widget(form.child)}}
 				{{form_rest(form)}}
-			<input type="submit" id="formok" class= "btn btn">
+			<input type="submit" id="formok" class= "btn btn-primary">
 		</form>
 </div>	
 {% endblock %}
