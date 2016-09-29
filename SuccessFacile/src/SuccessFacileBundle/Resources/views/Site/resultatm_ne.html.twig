@@ -103,14 +103,15 @@ soit la valeur de {{residencefinal | number_format(2, ',', ' ')}} euros</p>
 		<td>{{partM| number_format(2,',',' ')}} euros</td>
 		<td>0 euros</td>
 	</tr>
+		{%if mere == TRUE or pere == TRUE %}	
+
 	<tr>
 		<td>Part par parent survivant</td>
-		{%if mere == TRUE or pere == TRUE %}	
 		<td>25% du patrimoine du defunt</td>
-		{%endif%}
 		<td>{{partP| number_format(2,',',' ')}} euros</td>
 		<td>{{taxeP| number_format(2,',',' ')}} euros</td>
 	</tr>
+		{%endif%}
 	</tbody>
 	</table>
 {%endblock%}
