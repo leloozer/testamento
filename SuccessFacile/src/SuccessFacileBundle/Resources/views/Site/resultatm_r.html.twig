@@ -1,4 +1,5 @@
 	{% extends "SuccessFacileBundle::layout.html.twig"%}
+{% trans_default_domain 'SuccessFacileBundle' %}
 	{%block body %}
 	<div class="container">
 	<div class="row">
@@ -68,4 +69,12 @@ soit la valeur de {{residencefinal | number_format(2, ',', ' ')}} euros</p>
 	</tr>
 	</tbody>
 	</table>
+	<div class="container">
+	<div class="col-lg-5">
+	<div class = "row">
+<p>{{'result.apropos' | trans}} <a href="https://testamento.fr/fr">ici.</a></p>
+</div>
+</div>
+</div>
+<p>Informations non contractuelles, calculées sur les bases du montant du patrimoine net renseigné.</p>
 {%endblock%}

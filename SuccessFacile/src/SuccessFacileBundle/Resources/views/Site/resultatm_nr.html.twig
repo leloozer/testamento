@@ -1,4 +1,5 @@
 	{% extends "SuccessFacileBundle::layout.html.twig"%}
+{% trans_default_domain 'SuccessFacileBundle' %}
 	{%block body %}
 	<div class="container">
 	<div class="row">
@@ -6,9 +7,9 @@
 	<div class="alert alert-info">
 		<div style="text-align:center;text-inline">
 		<span class="glyphicon glyphicon-user" style="font-size:300%;"></span>
-		<h3>Votre situation</h3>
+		<h3>{{ 'result.situtitre' |trans |raw}}</h3>
 		</div>
-	<p>Vous êtes marié(e)</p>
+	<p>{{'result.situ1' |trans }}</p>
 	<p><strong>Vous avez</strong> {{age}} ans</p>
 	<p><strong>Vous avez</strong> {{enfant}} enfant(s)</p>
 	</div>
@@ -17,60 +18,57 @@
 	<div class="alert alert-info">
 		<div style="text-align:center;text-inline">
 		<span class="glyphicon glyphicon-euro" style="font-size:300%;"></span>
-		<h3>Votre patrimoine</h3>
+		<h3> {{ 'result.patrimoinetitre' | trans }}</h3>
 		</div>
-	<p><strong>Valeur de votre residence:</strong> {{residencetotal| number_format(2, ',',' ')}} euros dont vous détenez {{pourcent_residence}}% en 
+	<p><strong>{{ 'result.valresidence1' |trans}}</strong> {{residencetotal| number_format(2, ',',' ')}} {{'result.valresidence2' |trans }} {{pourcent_residence}}% 
 {%if opt_residence == 0 %}
-en pleine propriété
+{{'result.optresidence0' | trans }}
 {% endif %}
 {%if opt_residence == 1 %}
-en SCI
+{{ 'result.optresidence1' | trans }}
 {% endif %}
 {%if opt_residence == 2 %}
-en indivision
+{{'result.optresidence2' |trans }}
 {% endif %}
 {%if opt_residence == 3 %}
-en Nue_propriété
+{{'result.optresidence3' |trans }}
 {% endif %}
 {%if opt_residence == 4 %}
-en Usufruit
+{{'result.optresidence4' |trans }}
 {% endif %}
-soit la valeur de {{residencefinal | number_format(2, ',', ' ')}} euros</p>
-	<p><strong>Montant de votre épargne:</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
-	<p><strong>Autre:</strong> {{autre|number_format(2,',',' ')}} euros</p>
-	<p><strong>Soit un patrimoine de</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>
+{{'result.valresidence3' |trans }} {{residencefinal | number_format(2, ',', ' ')}} euros</p>
+	<p><strong>{{'result.valepargne' |trans }}</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
+	<p><strong>{{'result.autre' |trans }}</strong> {{autre|number_format(2,',',' ')}} euros</p>
+	<p><strong>{{'result.allpat' |trans}}</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>
 	</div>
 	</div>
 	<div class="container">
 		<div style="text-align:center;text-inline">
 		<span class="glyphicon glyphicon-stats" style="font-size:300%;"></span>
-		<h3>Votre Bilan</h3>
+		<h3>{{'result.rapporttitre' | trans}}</h3>
 		</div>
 	<p><strong>Valeur de l'usufruit fiscal(Art. 669 CGI)</strong> {{val_usufruit}}%</p>
 	<p><strong>Valeur de la Nue-Propriété</strong> {{nue_propriete}}%</p>
-		<div style="text-align:center;text-inline">
-	<h3>Vos Solutions</h3>
-		</div>
 	<table class="table table-hover">
 	<thead>
 	<tr class="warning">
 		<th>Votre répartition</th>
-		<th>Option 1</th>
-		<th>Taxe option 1</th>
-		<th>Option 2</th>
-		<th>Taxe option 2</th>
-		<th>Option 3</th>
-		<th>Taxe option 3</th>
-		<th>Option 4</th>
-		<th>Taxe option 4</th>
+		<th>1/4 en pleine propriété</th>
+		<th>Taxe 1/4 en pleine propriété</th>
+		<th>Totalité de la succession en usufruit</th>
+		<th>Taxe Totalité de la succession en usufruit</th>
+		<th>1/4 en pleine propriété et 3/4 en usufruit</th>
+		<th>Taxe 1/4 en pleine propriété et 3/4 en usufruit</th>
+		<th>Quotité disponible en pleine propriété</th>
+		<th>Taxe Quotité disponible en pleine propriété</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td>Conjoint survivant</td>
-		<td>{{conjoint_opt1|number_format(2, ',', ' ')}} euros</td>
-		<td>Pas de taxe au conjoint</td>
 		<td>{{conjoint_opt2| number_format(2, ',', ' ')}} euros</td>
+		<td>Pas de taxe au conjoint</td>
+		<td>{{conjoint_opt1|number_format(2, ',', ' ')}} euros</td>
 		<td>Pas de taxe au conjoint</td>
 		<td>{{conjoint_opt3| number_format(2, ',',' ')}} euros</td>
 		<td>Pas de taxe au conjoint</td>
@@ -79,10 +77,10 @@ soit la valeur de {{residencefinal | number_format(2, ',', ' ')}} euros</p>
 	</tr>
 	<tr>
 		<td>Part par enfant</td>
-		<td>{{enfant_opt1| number_format(2, ',', ' ')}} euros</td>
-		<td>{{taxe_opt1| number_format(2, ',', ' ')}} euros</td>
 		<td>{{enfant_opt2| number_format(2,',', ' ')}} euros</td>
 		<td>{{taxe_opt2| number_format(2, ',', ' ')}} euros</td>
+		<td>{{enfant_opt1| number_format(2, ',', ' ')}} euros</td>
+		<td>{{taxe_opt1| number_format(2, ',', ' ')}} euros</td>
 		<td>{{enfant_opt3| number_format(2,',', ' ')}} euros</td>
 		<td>{{taxe_opt3| number_format(2, ',', ' ')}} euros</td>
 		<td>{{enfant_opt4| number_format(2,',',' ')}} euros</td>
@@ -90,4 +88,12 @@ soit la valeur de {{residencefinal | number_format(2, ',', ' ')}} euros</p>
 	</tr>
 	</tbody>
 	</table>
+	<div class="container">
+	<div class="col-lg-5">
+	<div class = "row">
+<p>{{'result.apropos' | trans}} <a href="https://testamento.fr/fr">ici.</a></p>
+</div>
+</div>
+</div>
+<p>Informations non contractuelles, calculées sur les bases du montant du patrimoine net renseigné.</p>
 {%endblock%}

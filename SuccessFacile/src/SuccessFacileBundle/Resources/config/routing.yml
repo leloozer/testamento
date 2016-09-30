@@ -2,16 +2,21 @@ Acceuil:
     path: /
     defaults: { _controller: SuccessFacileBundle:Site:index }
 
+Other:
+    path: /calcul-droit-de-sucession
+    defaults: { _controller: SuccessFacileBundle:Site:quelchoix }
+
+
 Simulateur:
-    path: /simulateur
+    path: /droit-de-succession-mes-heritiers
     defaults: { _controller: SuccessFacileBundle:Calcul:index }
 
 Combien:
-    path: /combien
+    path: /droit-de-succession-apres-heritage
     defaults: { _controller: SuccessFacileBundle:Combien:index }
 
 Quotite:
-    path: /quotite
+    path: /calcul-de-quotite-disponible
     defaults: { _controller: SuccessFacileBundle:Quotite:index }
 
 recompose:

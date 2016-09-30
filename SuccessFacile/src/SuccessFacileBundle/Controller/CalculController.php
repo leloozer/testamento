@@ -535,7 +535,7 @@ class CalculController extends Controller
 			if ($siblings == 0 && ($pere == FALSE || $mere == FALSE))
 			{
 				$partP = $patrimoine;
-				$taxeP = $tax->Taxecumule0($partP);
+				$taxeP = $tax->TaxEcumule0($partP);
 				$partE = 0;
 				$taxeE = 0;
 				$pourcentE = 0;

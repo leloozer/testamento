@@ -1,0 +1,18 @@
+	{% extends "SuccessFacileBundle::layout.html.twig" %}
+{% trans_default_domain 'SuccessFacileBundle' %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-lg-4">
+		<h2>{{'index.gras1' |trans | raw}}</h2>
+		<p>Je calcule les droits de succession à payer  pour mes héritiers.</p>
+		<p><a class="btn btn-danger" href="{{path('Simulateur')}}" role="button">Calculateur >></a></p>
+		</div>
+		<div class="col-lg-4">
+		<h2>{{'index.gras2' |trans | raw}}</h2>
+        <p>Je calcule les frais  de succession  à payer<p>
+		<p><a class="btn btn-success" href="{{path('Combien')}}" role="button">Calculateur >></a></p> </div>
+	</div>
+</div>
+{% endblock %}
+

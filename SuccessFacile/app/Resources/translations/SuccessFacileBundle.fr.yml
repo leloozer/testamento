@@ -1,15 +1,72 @@
 # ACCEUIL
 index:
     titre: La succession transparente.
-    lead: Gr&acirc;ce &agrave; nos simulateurs de succession, d&eacute;couvrez qui sont vos h&eacute;ritiers en l'absence de testament, le montant de la taxe apr&egrave;s une succession et quelle est votre quotit&eacute; disponible.
-    gras1: Vous souhaitez conna&icirc;tre vos h&eacute;ritiers en l'absence de testament ?
-    p1: Le simulateur "H&eacute;ritiers" r&eacute;pondra &agrave; vos questions et vous apportera une r&eacute;ponse personnalis&eacute;e afin de prendre les bonnes dispositions testamentaires.
-    gras2: Vous souhaitez conna&icirc;tre le montant de la taxe apr&egrave;s un h&eacute;ritage?
-    p2: Le simulateur "Taxe" r&eacute;pondra &agrave; vos questions et vous apportera une r&eacute;ponse personnalis&eacute;e afin de ne pas avoir de mauvaises surprises.
-    gras3: Vous souhaitez faire un legs?
-    p3: Le simulateur "Quotit&eacute;" r&eacute;pondra &agrave; vos questions et vous apportera une r&eacute;ponse personnalis&eacute;e pour pr&eacute;parer votre legs dans les bonnes contitions.
+    lead: Grâce à nos simulateurs de calcul de droits succession, découvrez qui sont vos héritiers en l'absence de testament, le montant des frais de succession à payer lors d'un héritage, et la valeur de votre quotité disponible.
+    gras1: J'anticipe ma succession
+    p1: Notre simulateur gratuit estime le montant des droits de succession à payer par vos héritiers en fonction de votre situation familiale et de la valeur de votre patrimoine. 
+    gras2: Je viens d'hériter
+    p2: Notre simulateur gratuit estime les taxes, aussi appelées "droits de succession". Ces droits de succession sont à payer dans les 6 mois qui suivent l héritage.
+    gras3: Calculer ma quotité disponible
+    p3: La quotité disponible est la part de votre patrimoine dont vous pouvez librement disposer. Notre simulateur gratuit vous permet de calculer le pourcentage et la valeur de votre quotité disponible en fonction de votre situation familiale. 
 form:
     situation: Quelle est votre situation familiale?
-    age: Votre âge (ans) ?
-    child: Nombre d'enfants ?
+    age: Votre âge (ans)?
+    child: Nombre d'enfants?
+result:
+    situtitre: Votre situation
+    situ0: Vous êtes célibataire
+    situ1: Vous êtes marié(e)
+    situ2: Vous êtes veuf(ve)
+    situ3: Vous êtes divorcé(e)
+    situ5: Vous êtes partenaire d'un PACS
+    situ6: Vous êtes en concubinage
+    nochild: Vous n'avez pas d'enfant
+    abschild: En l'absence de conjoint et d'enfants, les héritiers réservataires sont les ascendants et/ou les frères et soeurs.
+    momtrue: Votre mère est vivante.
+    momfalse: Votre mère est décédée.
+    paptrue: Votre père est vivant.
+    papfalse: Votre père est décédé.
+    nbsibling1: Vous avez
+    nbsibling2: frères et soeurs.
+    noparent: Vos parents sont décédés.
+    nosibling: Vous avez n'avez pas de frères et soeurs
+    gppaterneltrue: Vos grands-parents paternels sont vivants.
+    gppaternelfalse: Vos grands-parents paternels sont décédés.
+    gpmaterneltrue: Vos grands-parents maternels sont vivants.
+    gpmaternelfalse: Vos grands-parents maternels sont décédés.
+    patrimoinetitre: Votre patrimoine
+    valresidence1: Valeur de votre résidence:
+    valresidence2: euros dont vous détenez
+    optresidence0: en pleine propriété
+    optresidence1: en SCI
+    optresidence2: en indivision
+    optresidence3: en Nue_propriété
+    optresidence4: en Usufruit
+    valresidence3: soit la valeur de 
+    valepargne: Montant de votre épargne: 
+    autre: Autre:
+    allpat: Soit un patrimoine de
+    rapporttitre: Votre Rapport
+    childconjoint: enfant(s) de votre conjoint n'ont pas de succession
+    notdon: Si vous n'en avez pas faite
+    don: Si vous avez fait une donation entre époux
+    apropos: A propos : La situation présentée ci-dessus n'est pas définitive. Vous pouvez choisir vos héritiers, en fonction de votre situation familiale, grâce à un testament.Ce calculateur gratuit vous est fourni par Testamento, inventeur du testament en ligne et primé à de multiples reprises. Testamento propose depuis 2013 une solution simple, rapide et accessible, développée avec des notaires et avocats, pour préparer un testament 100% légal et conservé par un notaire. Pour en savoir plus sur Testamento, cliquez
+tab:
+    revenant: Revenant
+    proportion: Proportion
+    value: Valeur
+    taxe: Cout Droit de succession
+    parenttrue: Part par parent vivant
+    100pat: 100% du patrimoine total
+    75pat: 50% du patrimoine total
+    50pat: 50% du patrimoine total
+    25pat: 25% du patrimoine total
+    sibling: Part par frère et soeur
+    patall: du patrimoine total
+    partchild: Part par enfant
+    taxe++: La taxe est calculée en fonction de votre degré avec le défunt
+    partmaternel: Part famille maternel
+    partpaternel: Part famille paternel
+    part2gp: Part par grand-parent vivant
+    partother: Part pour l'autre famille
 

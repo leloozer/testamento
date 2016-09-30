@@ -1,4 +1,5 @@
 	{% extends "SuccessFacileBundle::layout.html.twig"%}
+{% trans_default_domain 'SuccessFacileBundle' %}
 	{%block body %}
 	<div class="container">
 	<div class="row">
@@ -6,22 +7,22 @@
 	<div class="alert alert-info">
 		<div style="text-align:center;text-inline">
 		<span class="glyphicon glyphicon-user" style="font-size:300%;"></span>
-		<h3>Votre situation</h3>
+		<h3>{{ 'result.situtitre' |trans |raw}}</h3>
 		</div>
 	{% if app.session.get('situ') == 0 %}
-	<p><h5>Vous êtes célibataire</h5></p>
+	<p><h5>{{ 'result.situ0' | trans |raw }}</h5></p>
 	{% endif %}
 	{% if app.session.get('situ') == 2 %}
-	<p><h5>Vous êtes veuf(ve)</h5></p>
+	<p><h5>{{ 'result.situ2' | trans |raw }}</h5></p>
 	{% endif %}
 	{% if app.session.get('situ') == 3 %}
-	<p><h5>Vous êtes divorcé(e)</h5></p>
+	<p><h5>{{ 'result.situ3' | trans |raw }}</h5></p>
 	{% endif %}
 	{% if app.session.get('situ') == 5 %}
-	<p><h5>Vous êtes pacsé(e)</h5></p>
+	<p><h5>{{ 'result.situ5' | trans | raw }}</h5></p>
 	{% endif %}
 	{% if app.session.get('situ') == 6 %}
-	<p><h5>Vous êtes en concubinage</h5></p>
+	<p><h5>{{ 'result.situ6' | trans | raw }}</h5></p>
 	{% endif %}
 	<p><strong>Votre &acirc;ge</strong> {{age}} ans</p>
 	<p><strong>Vous avez</strong> {{enfant}} enfant(s)</p>
@@ -31,47 +32,47 @@
 	<div class="alert alert-info">
 		<div style="text-align:center;text-inline">
 		<span class="glyphicon glyphicon-euro" style="font-size:300%;"></span>
-		<h3>Votre patrimoine</h3>
+		<h3> {{ 'result.patrimoinetitre' | trans }}</h3>
 		</div>
-	<p><strong>Valeur de votre residence:</strong> {{residencetotal| number_format(2, ',',' ')}} euros dont vous détenez {{pourcent_residence}}% en 
+	<p><strong>{{ 'result.valresidence1' |trans}}</strong> {{residencetotal| number_format(2, ',',' ')}} {{'result.valresidence2' |trans }} {{pourcent_residence}}% 
 {%if opt_residence == 0 %}
-en pleine propriété
+{{'result.optresidence0' | trans }}
 {% endif %}
 {%if opt_residence == 1 %}
-en SCI
+{{ 'result.optresidence1' | trans }}
 {% endif %}
 {%if opt_residence == 2 %}
-en indivision
+{{'result.optresidence2' |trans }}
 {% endif %}
 {%if opt_residence == 3 %}
-en Nue_propriété
+{{'result.optresidence3' |trans }}
 {% endif %}
 {%if opt_residence == 4 %}
-en Usufruit
+{{'result.optresidence4' |trans }}
 {% endif %}
-soit la valeur de {{residencefinal | number_format(2, ',', ' ')}} euros</p>
-	<p><strong>Montant de votre épargne:</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
-	<p><strong>Autre:</strong> {{autre|number_format(2,',',' ')}} euros</p>
-	<p><strong>Soit un patrimoine de</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>
+{{'result.valresidence3' |trans }} {{residencefinal | number_format(2, ',', ' ')}} euros</p>
+	<p><strong>{{'result.valepargne' |trans }}</strong> {{epargne| number_format(2,',', ' ')}} euros</p>
+	<p><strong>{{'result.autre' |trans }}</strong> {{autre|number_format(2,',',' ')}} euros</p>
+	<p><strong>{{'result.allpat' |trans}}</strong> {{patrimoine|number_format(2,',',' ')}} euros.</p>
 	</div>
 	</div>
 	<div class="container">
 		<div style="text-align:center;text-inline">
 		<span class="glyphicon glyphicon-stats" style="font-size:300%;"></span>
-		<h3>Votre rapport</h3>
+		<h3>{{'result.rapporttitre' | trans}}</h3>
 		</div>
 	<table class="table table-hover">
 	<thead>
 	<tr class="warning">
-		<th>Revenant</th>
-		<th>Proportion</th>
-		<th>Valeur</th>
-		<th>Cout Droit de succession</th>
+		<th>{{'tab.revenant' | trans}}</th>
+		<th>{{'tab.proportion' | trans}}</th>
+		<th>{{'tab.value' |trans}}</th>
+		<th>{{'tab.taxe' |trans}}</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
-		<td>Part par enfant</td>
+		<td>{{ 'tab.partchild' | trans}}</td>
 		<td>1/{{enfant}} du patrimoine total</td>
 		<td>{{part| number_format(2,',',' ')}} euros</td>
 		<td>{{taxe| number_format(2,',',' ')}} euros</td>
@@ -79,4 +80,12 @@ soit la valeur de {{residencefinal | number_format(2, ',', ' ')}} euros</p>
 	</tbody>
 	</table>
 	</div>
+	<div class="container">
+	<div class="col-lg-5">
+	<div class = "row">
+<p>{{'result.apropos' | trans}} <a href="https://testamento.fr/fr">ici.</a></p>
+</div>
+</div>
+</div>
+<p>Informations non contractuelles, calculées sur les bases du montant du patrimoine net renseigné.</p>
 {%endblock%}

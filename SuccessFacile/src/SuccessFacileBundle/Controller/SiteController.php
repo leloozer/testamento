@@ -14,6 +14,10 @@ class SiteController extends Controller
 		return $this->render('SuccessFacileBundle:Site:index.html.twig');
 	}
 
+	public function quelchoixAction()
+	{
+		return $this->render('SuccessFacileBundle:Site:droitdesuccess.html.twig');
+	}
 	public function aboutAction()
 	{
 		return $this->render('SuccessFacileBundle:Site:about.html.twig');
